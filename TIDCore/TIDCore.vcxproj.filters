@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Splitter">
+      <UniqueIdentifier>{40053017-5e46-4433-a277-b6b686d36fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ToolCode">
+      <UniqueIdentifier>{18d1d1dc-64d5-4114-bcb7-aa0cb7a0eedc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TowerCad">
+      <UniqueIdentifier>{7f544f77-3cf6-4d6f-9ffa-bb0341c5a609}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="TidCore.def">
+      <Filter>源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TIDModel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TidApi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolCode\Buffer.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolCode\LogFile.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolCode\SolidBody.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolCode\SolidBodyBuffer.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolCode\XhCharString.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TowerCad\SegI.h">
+      <Filter>TowerCad</Filter>
+    </ClInclude>
+    <ClInclude Include="Splitter\glDrawTool.h">
+      <Filter>Splitter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TowerCad\TIDBuffer.h">
+      <Filter>TowerCad</Filter>
+    </ClInclude>
+    <ClInclude Include="TidCplus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TowerCad\WirePlaceCode.h">
+      <Filter>TowerCad</Filter>
+    </ClInclude>
+    <ClInclude Include="TidToolFunc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TIDModel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TidApi.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolCode\Buffer.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolCode\LogFile.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolCode\SolidBody.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolCode\SolidBodyBuffer.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolCode\XhCharString.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TowerCad\SegI.cpp">
+      <Filter>TowerCad</Filter>
+    </ClCompile>
+    <ClCompile Include="Splitter\glDrawTool.cpp">
+      <Filter>Splitter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TowerCad\TIDBuffer.cpp">
+      <Filter>TowerCad</Filter>
+    </ClCompile>
+    <ClCompile Include="TidCplus.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TowerCad\WirePlaceCode.cpp">
+      <Filter>TowerCad</Filter>
+    </ClCompile>
+    <ClCompile Include="TidToolFunc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

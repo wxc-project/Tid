@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D2082057-087D-48CC-97DA-206FCE1AF884}</ProjectGuid>
+    <Keyword>MFCProj</Keyword>
+    <SccProjectName>"$/", AAAAAAAA</SccProjectName>
+    <SccLocalPath>..</SccLocalPath>
+    <SccProvider>MSSCCI:Microsoft Visual SourceSafe</SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Graphics;..\ToolCode;..\TowerCad;..\DrawSolid;..\XeroCad;..\PartLib;.\TidCore;..\XhLdsLm;..\XhLicAgent;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;TidCore.lib;PartLib.lib;XhLdsLm2.lib;XhLicAgent2.lib;MODCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\TidCore\Debug;..\Graphics;..\DrawSolid\Release;..\XeroCad\Release;..\PartLib\Debug;..\XhLdsLm\Release;..\XhLicAgent\Release;..\MODCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\Graphics;..\ToolCode;..\TowerCad;..\DrawSolid;..\XeroCad;..\PartLib;.\TidCore;..\XhLdsLm;..\XhLicAgent;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;TidCore.lib;PartLib.lib;XhLdsLm2.lib;XhLicAgent2.lib;MODCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\TidCore\Release;..\Graphics;..\DrawSolid\Release;..\XeroCad\Release;..\PartLib\Release;..\XhLdsLm\Release;..\XhLicAgent\Release;..\MODCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ToolCode\Buffer.cpp" />
+    <ClCompile Include="..\ToolCode\BufferStack.cpp" />
+    <ClCompile Include="..\ToolCode\ColorSelectComboBox.cpp" />
+    <ClCompile Include="..\ToolCode\CreateFace.cpp" />
+    <ClCompile Include="..\ToolCode\DialogPanel.cpp" />
+    <ClCompile Include="..\ToolCode\HiberarchyId.cpp" />
+    <ClCompile Include="..\ToolCode\LogFile.cpp" />
+    <ClCompile Include="..\ToolCode\PropertyList.cpp" />
+    <ClCompile Include="..\ToolCode\SolidBody.cpp" />
+    <ClCompile Include="..\ToolCode\SolidBodyBuffer.cpp" />
+    <ClCompile Include="..\ToolCode\XhCharString.cpp" />
+    <ClCompile Include="..\TowerCad\ParseAdaptNo.cpp" />
+    <ClCompile Include="..\TowerCad\SegI.cpp" />
+    <ClCompile Include="..\TowerCad\TIDBuffer.cpp" />
+    <ClCompile Include="AssemblePart.cpp" />
+    <ClCompile Include="DisplayPartProperty.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="ProcBarDlg.cpp" />
+    <ClCompile Include="SetActiveItemDlg.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TID.cpp" />
+    <ClCompile Include="TIDDoc.cpp" />
+    <ClCompile Include="TIDView.cpp" />
+    <ClCompile Include="TowerPropertyDlg.cpp" />
+    <ClCompile Include="TowerTreeCtrl.cpp" />
+    <ClCompile Include="TowerTreeDlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\ToolCode\Buffer.h" />
+    <ClInclude Include="..\ToolCode\BufferStack.h" />
+    <ClInclude Include="..\ToolCode\ColorSelectComboBox.h" />
+    <ClInclude Include="..\ToolCode\CreateFace.h" />
+    <ClInclude Include="..\ToolCode\DialogPanel.h" />
+    <ClInclude Include="..\ToolCode\HiberarchyId.h" />
+    <ClInclude Include="..\ToolCode\LogFile.h" />
+    <ClInclude Include="..\ToolCode\PropertyList.h" />
+    <ClInclude Include="..\ToolCode\SolidBody.h" />
+    <ClInclude Include="..\ToolCode\SolidBodyBuffer.h" />
+    <ClInclude Include="..\ToolCode\XhCharString.h" />
+    <ClInclude Include="..\TowerCad\ParseAdaptNo.h" />
+    <ClInclude Include="..\TowerCad\SegI.h" />
+    <ClInclude Include="..\TowerCad\TIDBuffer.h" />
+    <ClInclude Include="AssemblePart.h" />
+    <ClInclude Include="CommandDefOper.h" />
+    <ClInclude Include="image.h" />
+    <ClInclude Include="ldsptr_list.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="ProcBarDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SetActiveItemDlg.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TID.h" />
+    <ClInclude Include="TIDDoc.h" />
+    <ClInclude Include="TIDView.h" />
+    <ClInclude Include="TowerPropertyDlg.h" />
+    <ClInclude Include="TowerTreeCtrl.h" />
+    <ClInclude Include="TowerTreeDlg.h" />
+    <ClInclude Include="UserDefMsg.h" />
+    <ClInclude Include="UserDefOper.h" />
+    <ClInclude Include="XhPtrList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\arrow1.cur" />
+    <None Include="res\arrow2.cur" />
+    <None Include="res\arrow_ci.cur" />
+    <None Include="res\arrow_dr.cur" />
+    <None Include="res\arrow_li.cur" />
+    <None Include="res\arrow_no.cur" />
+    <None Include="res\arrow_po.cur" />
+    <None Include="res\arrow_zo.cur" />
+    <None Include="res\Cross.cur" />
+    <None Include="res\cur00001.cur" />
+    <None Include="res\cur00002.cur" />
+    <None Include="res\cur00003.cur" />
+    <None Include="res\cursor_l.cur" />
+    <None Include="res\Dragcopy.cur" />
+    <None Include="res\Draglink.cur" />
+    <None Include="res\Dragmove.cur" />
+    <None Include="res\draw_arr.cur" />
+    <None Include="res\draw_cro.cur" />
+    <None Include="res\il_file.bmp" />
+    <None Include="res\Move4way.cur" />
+    <None Include="res\Normal01.cur" />
+    <None Include="res\Pencil.cur" />
+    <None Include="res\TID.ico" />
+    <None Include="res\TID.rc2" />
+    <None Include="res\TIDDoc.ico" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="ReadMe.txt" />
+    <None Include="TID.reg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TID.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\TID.manifest" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="TID.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="ToolCode">
+      <UniqueIdentifier>{4e9c78f2-55f4-48c7-8599-3e9c0b3b1a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TowerCad">
+      <UniqueIdentifier>{d42bd015-95d3-491d-8a14-3c257bce2cc1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TID.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TIDDoc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TIDView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcBarDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\DialogPanel.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerPropertyDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerTreeCtrl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerTreeDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayPartProperty.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\PropertyList.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\ColorSelectComboBox.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\BufferStack.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\Buffer.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\XhCharString.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\SolidBody.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\SolidBodyBuffer.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\HiberarchyId.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\CreateFace.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblePart.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TowerCad\TIDBuffer.cpp">
+      <Filter>TowerCad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ToolCode\LogFile.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TowerCad\SegI.cpp">
+      <Filter>TowerCad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TowerCad\ParseAdaptNo.cpp">
+      <Filter>TowerCad</Filter>
+    </ClCompile>
+    <ClCompile Include="SetActiveItemDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainFrm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TID.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TIDDoc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TIDView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XhPtrList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcBarDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\DialogPanel.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerPropertyDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerTreeCtrl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerTreeDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandDefOper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDefMsg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDefOper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\PropertyList.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\ColorSelectComboBox.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\Buffer.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\BufferStack.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\XhCharString.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\SolidBody.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\SolidBodyBuffer.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\HiberarchyId.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\CreateFace.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="AssemblePart.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TowerCad\TIDBuffer.h">
+      <Filter>TowerCad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ToolCode\LogFile.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TowerCad\SegI.h">
+      <Filter>TowerCad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TowerCad\ParseAdaptNo.h">
+      <Filter>TowerCad</Filter>
+    </ClInclude>
+    <ClInclude Include="SetActiveItemDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ldsptr_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\arrow1.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\arrow2.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\arrow_ci.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\arrow_dr.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\arrow_li.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\arrow_no.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\arrow_po.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\arrow_zo.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Cross.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\cur00001.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\cur00002.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\cur00003.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\cursor_l.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Dragcopy.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Draglink.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Dragmove.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\draw_arr.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\draw_cro.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Move4way.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Normal01.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Pencil.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\TID.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\TID.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\TIDDoc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+    <None Include="TID.reg" />
+    <None Include="res\il_file.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TID.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\TID.manifest" />
+  </ItemGroup>
+</Project>
