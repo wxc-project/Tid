@@ -64,7 +64,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\Graphics;..\ToolCode;..\TowerCad;..\DrawSolid;..\XeroCad;..\PartLib;.\TidCore;..\XhLdsLm;..\XhLicAgent;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\XhCore\AlgFun;..\..\XhCore\EntList;..\..\XhCore\Ent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\..\XhCore\DrawSolid;..\..\XhCore\XeroCad;..\..\XhCore\PartLib;..\..\XhLmd\XhLdsLm;..\..\XhLmd\XhLicAgent;..\TidCore;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -76,8 +76,8 @@
       <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;TidCore.lib;PartLib.lib;XhLdsLm2.lib;XhLicAgent2.lib;MODCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>.\TidCore\Debug;..\Graphics;..\DrawSolid\Release;..\XeroCad\Release;..\PartLib\Debug;..\XhLdsLm\Release;..\XhLicAgent\Release;..\MODCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;PartLib.lib;XhLdsLm2.lib;XhLicAgent2.lib;MODCore.lib;TidCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;..\..\XhCore\DrawSolid\Release;..\..\XhCore\XeroCad\Release;..\..\XhCore\PartLib\Debug;..\..\XhLmd\XhLdsLm\Release2;..\..\XhLmd\XhLicAgent\Release2;..\MODCore\Debug;..\TidCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -94,7 +94,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\Graphics;..\ToolCode;..\TowerCad;..\DrawSolid;..\XeroCad;..\PartLib;.\TidCore;..\XhLdsLm;..\XhLicAgent;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\XhCore\AlgFun;..\..\XhCore\EntList;..\..\XhCore\Ent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\..\XhCore\DrawSolid;..\..\XhCore\XeroCad;..\..\XhCore\PartLib;..\..\XhLmd\XhLdsLm;..\..\XhLmd\XhLicAgent;..\TidCore;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -106,7 +106,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;TidCore.lib;PartLib.lib;XhLdsLm2.lib;XhLicAgent2.lib;MODCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>.\TidCore\Release;..\Graphics;..\DrawSolid\Release;..\XeroCad\Release;..\PartLib\Release;..\XhLdsLm\Release;..\XhLicAgent\Release;..\MODCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;..\..\XhCore\DrawSolid\Release;..\..\XhCore\XeroCad\Release;..\..\XhCore\PartLib\Release;..\..\XhLmd\XhLdsLm\Release2;..\..\XhLmd\XhLicAgent\Release2;..\MODCore\Release;..\TidCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -124,20 +124,20 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\ToolCode\Buffer.cpp" />
-    <ClCompile Include="..\ToolCode\BufferStack.cpp" />
-    <ClCompile Include="..\ToolCode\ColorSelectComboBox.cpp" />
-    <ClCompile Include="..\ToolCode\CreateFace.cpp" />
-    <ClCompile Include="..\ToolCode\DialogPanel.cpp" />
-    <ClCompile Include="..\ToolCode\HiberarchyId.cpp" />
-    <ClCompile Include="..\ToolCode\LogFile.cpp" />
-    <ClCompile Include="..\ToolCode\PropertyList.cpp" />
-    <ClCompile Include="..\ToolCode\SolidBody.cpp" />
-    <ClCompile Include="..\ToolCode\SolidBodyBuffer.cpp" />
-    <ClCompile Include="..\ToolCode\XhCharString.cpp" />
-    <ClCompile Include="..\TowerCad\ParseAdaptNo.cpp" />
-    <ClCompile Include="..\TowerCad\SegI.cpp" />
-    <ClCompile Include="..\TowerCad\TIDBuffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\Buffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\BufferStack.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\ColorSelectComboBox.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\CreateFace.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\DialogPanel.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\HiberarchyId.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\LogFile.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\PropertyList.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBody.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\XhCharString.cpp" />
+    <ClCompile Include="..\..\ToolKits\TowerCad\ParseAdaptNo.cpp" />
+    <ClCompile Include="..\..\ToolKits\TowerCad\SegI.cpp" />
+    <ClCompile Include="..\..\ToolKits\TowerCad\TIDBuffer.cpp" />
     <ClCompile Include="AssemblePart.cpp" />
     <ClCompile Include="DisplayPartProperty.cpp" />
     <ClCompile Include="MainFrm.cpp" />
@@ -155,20 +155,20 @@
     <ClCompile Include="TowerTreeDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ToolCode\Buffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\Buffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\ColorSelectComboBox.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\CreateFace.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\DialogPanel.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\HiberarchyId.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\LogFile.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\PropertyList.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBody.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\XhCharString.h" />
+    <ClInclude Include="..\..\ToolKits\TowerCad\ParseAdaptNo.h" />
+    <ClInclude Include="..\..\ToolKits\TowerCad\SegI.h" />
+    <ClInclude Include="..\..\ToolKits\TowerCad\TIDBuffer.h" />
     <ClInclude Include="..\ToolCode\BufferStack.h" />
-    <ClInclude Include="..\ToolCode\ColorSelectComboBox.h" />
-    <ClInclude Include="..\ToolCode\CreateFace.h" />
-    <ClInclude Include="..\ToolCode\DialogPanel.h" />
-    <ClInclude Include="..\ToolCode\HiberarchyId.h" />
-    <ClInclude Include="..\ToolCode\LogFile.h" />
-    <ClInclude Include="..\ToolCode\PropertyList.h" />
-    <ClInclude Include="..\ToolCode\SolidBody.h" />
-    <ClInclude Include="..\ToolCode\SolidBodyBuffer.h" />
-    <ClInclude Include="..\ToolCode\XhCharString.h" />
-    <ClInclude Include="..\TowerCad\ParseAdaptNo.h" />
-    <ClInclude Include="..\TowerCad\SegI.h" />
-    <ClInclude Include="..\TowerCad\TIDBuffer.h" />
     <ClInclude Include="AssemblePart.h" />
     <ClInclude Include="CommandDefOper.h" />
     <ClInclude Include="image.h" />

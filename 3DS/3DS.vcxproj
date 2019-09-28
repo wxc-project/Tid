@@ -57,12 +57,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MY3DS_EXPORTS;_DISABLE_DEBUG_NEW_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;.\lib3ds;..\Graphics;..\ToolCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\;..\..\XhCore\AlgFun;..\..\XhCore\Ent;..\..\XhCore\EntList;..\..\ToolKits\ToolCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\lib3ds\Debug;..\Graphics;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib3ds\Debug;..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;lib3ds.lib;f_ent.lib;f_ent_list.lib;f_alg_fun.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\3ds.def</ModuleDefinitionFile>
       <ImportLibrary>$(IntDir)3ds.lib</ImportLibrary>
@@ -76,14 +76,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MY3DS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;.\lib3ds;..\Graphics;..\ToolCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\;..\..\XhCore\AlgFun;..\..\XhCore\Ent;..\..\XhCore\EntList;..\..\ToolKits\ToolCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>.\lib3ds\Release;..\Graphics;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib3ds\Release;..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;lib3ds.lib;f_ent.lib;f_ent_list.lib;f_alg_fun.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\3ds.def</ModuleDefinitionFile>
       <ImportLibrary>$(IntDir)3ds.lib</ImportLibrary>
@@ -94,10 +94,10 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ToolCode\Buffer.h" />
-    <ClInclude Include="..\ToolCode\BufferStack.h" />
-    <ClInclude Include="..\ToolCode\SolidBody.h" />
-    <ClInclude Include="..\ToolCode\SolidBodyBuffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\Buffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\BufferStack.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBody.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.h" />
     <ClInclude Include="I3DS.h" />
     <ClInclude Include="3DS.h" />
     <ClInclude Include="glDrawTool.h" />
@@ -105,10 +105,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\ToolCode\Buffer.cpp" />
-    <ClCompile Include="..\ToolCode\BufferStack.cpp" />
-    <ClCompile Include="..\ToolCode\SolidBody.cpp" />
-    <ClCompile Include="..\ToolCode\SolidBodyBuffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\Buffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\BufferStack.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBody.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.cpp" />
     <ClCompile Include="3DS.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>

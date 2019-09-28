@@ -33,22 +33,22 @@
     <ClInclude Include="glDrawTool.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\ToolCode\SolidBody.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ToolCode\SolidBodyBuffer.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ToolCode\Buffer.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
     <ClInclude Include="I3DS.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="3DS.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\ToolCode\BufferStack.h">
+    <ClInclude Include="..\..\ToolKits\ToolCode\Buffer.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\BufferStack.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBody.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.h">
       <Filter>ToolCode</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,22 +62,22 @@
     <ClCompile Include="glDrawTool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\ToolCode\SolidBody.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ToolCode\SolidBodyBuffer.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ToolCode\Buffer.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
     <ClCompile Include="Factory.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="3DS.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\ToolCode\BufferStack.cpp">
+    <ClCompile Include="..\..\ToolKits\ToolCode\Buffer.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\BufferStack.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBody.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.cpp">
       <Filter>ToolCode</Filter>
     </ClCompile>
   </ItemGroup>

@@ -95,13 +95,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;TIDCORE_EXPORTS;_CRT_SECURE_NO_WARNINGS;APP_EMBEDDED_MODULE;_DISABLE_DEBUG_NEW_;_DISABLE_ALG_FUNC_;DISABLE_SOLID_BODY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;..\..\Ent;..\..\ToolCode;..\..\TowerCad;..\..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\..\XhCore\Ent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\MODCore\Debug;..\..\Ent\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore\Ent\Release;..\MODCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_ent.lib;ModCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\TidCore.def</ModuleDefinitionFile>
       <ImportLibrary>$(IntDir)TIDCore.lib</ImportLibrary>
@@ -132,14 +132,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;TIDCORE_EXPORTS;_CRT_SECURE_NO_WARNINGS;APP_EMBEDDED_MODULE;_DISABLE_DEBUG_NEW_;_DISABLE_ALG_FUNC_;DISABLE_SOLID_BODY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;..\..\ToolCode;..\..\TowerCad;..\..\MODCore;..\..\Ent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\..\XhCore\Ent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\Ent\Release;..\..\MODCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore\Ent\Release;..\MODCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_ent.lib;ModCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\TidCore.def</ModuleDefinitionFile>
     </Link>
@@ -170,14 +170,14 @@
     <None Include="TidCore.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ToolCode\Buffer.h" />
-    <ClInclude Include="..\..\ToolCode\LogFile.h" />
-    <ClInclude Include="..\..\ToolCode\SolidBody.h" />
-    <ClInclude Include="..\..\ToolCode\SolidBodyBuffer.h" />
-    <ClInclude Include="..\..\ToolCode\XhCharString.h" />
-    <ClInclude Include="..\..\TowerCad\SegI.h" />
-    <ClInclude Include="..\..\TowerCad\TIDBuffer.h" />
-    <ClInclude Include="..\..\TowerCad\WirePlaceCode.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\Buffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\LogFile.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBody.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\XhCharString.h" />
+    <ClInclude Include="..\..\ToolKits\TowerCad\SegI.h" />
+    <ClInclude Include="..\..\ToolKits\TowerCad\TIDBuffer.h" />
+    <ClInclude Include="..\..\ToolKits\TowerCad\WirePlaceCode.h" />
     <ClInclude Include="Splitter\glDrawTool.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -187,14 +187,14 @@
     <ClInclude Include="TidToolFunc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\ToolCode\Buffer.cpp" />
-    <ClCompile Include="..\..\ToolCode\LogFile.cpp" />
-    <ClCompile Include="..\..\ToolCode\SolidBody.cpp" />
-    <ClCompile Include="..\..\ToolCode\SolidBodyBuffer.cpp" />
-    <ClCompile Include="..\..\ToolCode\XhCharString.cpp" />
-    <ClCompile Include="..\..\TowerCad\SegI.cpp" />
-    <ClCompile Include="..\..\TowerCad\TIDBuffer.cpp" />
-    <ClCompile Include="..\..\TowerCad\WirePlaceCode.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\Buffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\LogFile.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBody.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\XhCharString.cpp" />
+    <ClCompile Include="..\..\ToolKits\TowerCad\SegI.cpp" />
+    <ClCompile Include="..\..\ToolKits\TowerCad\TIDBuffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\TowerCad\WirePlaceCode.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>

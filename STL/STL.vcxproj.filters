@@ -33,26 +33,26 @@
     <ClInclude Include="ISTL.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\ToolCode\Buffer.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ToolCode\SolidBody.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ToolCode\SolidBodyBuffer.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ToolCode\BufferStack.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ToolCode\CreateFace.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ToolCode\HashTable.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
     <ClInclude Include="STL.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\Buffer.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\BufferStack.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\CreateFace.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBody.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.h">
+      <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\HashTable.h">
+      <Filter>ToolCode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,26 +65,26 @@
     <ClCompile Include="glDrawTool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\ToolCode\Buffer.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ToolCode\SolidBody.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ToolCode\SolidBodyBuffer.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ToolCode\BufferStack.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ToolCode\CreateFace.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
     <ClCompile Include="STL.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Factory.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\Buffer.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\BufferStack.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\CreateFace.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBody.cpp">
+      <Filter>ToolCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.cpp">
+      <Filter>ToolCode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -56,12 +56,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;STL_EXPORTS;_DISABLE_DEBUG_NEW_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ToolCode;..\Graphics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ToolKits\ToolCode;..\..\XhCore\AlgFun;..\..\XhCore\Ent;..\..\XhCore\EntList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Graphics;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_ent.lib;f_ent_list.lib;f_alg_fun.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\STL.def</ModuleDefinitionFile>
     </Link>
@@ -74,7 +74,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;STL_EXPORTS;_DISABLE_DEBUG_NEW_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ToolCode;..\Graphics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ToolKits\ToolCode;..\..\XhCore\AlgFun;..\..\XhCore\Ent;..\..\XhCore\EntList;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,19 +83,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_ent.lib;f_ent_list.lib;f_alg_fun.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\STL.def</ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>..\Graphics;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ToolCode\Buffer.h" />
-    <ClInclude Include="..\ToolCode\BufferStack.h" />
-    <ClInclude Include="..\ToolCode\CreateFace.h" />
-    <ClInclude Include="..\ToolCode\HashTable.h" />
-    <ClInclude Include="..\ToolCode\SolidBody.h" />
-    <ClInclude Include="..\ToolCode\SolidBodyBuffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\Buffer.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\BufferStack.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\CreateFace.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\HashTable.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBody.h" />
+    <ClInclude Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.h" />
     <ClInclude Include="glDrawTool.h" />
     <ClInclude Include="ISTL.h" />
     <ClInclude Include="stdafx.h" />
@@ -103,11 +103,11 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\ToolCode\Buffer.cpp" />
-    <ClCompile Include="..\ToolCode\BufferStack.cpp" />
-    <ClCompile Include="..\ToolCode\CreateFace.cpp" />
-    <ClCompile Include="..\ToolCode\SolidBody.cpp" />
-    <ClCompile Include="..\ToolCode\SolidBodyBuffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\Buffer.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\BufferStack.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\CreateFace.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBody.cpp" />
+    <ClCompile Include="..\..\ToolKits\ToolCode\SolidBodyBuffer.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
