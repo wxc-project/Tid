@@ -11,10 +11,7 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+
 x64/
 x86/
 bld/
@@ -69,6 +66,18 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.read.1.tlog
+*.write.1.tlog
+*.command.1.tlog
+*.lastbuildstate
+*.dll.intermediate.manifest
+*.exp
+*.log
+*.pch
+*.res
+*.unsuccessfulbuild
+*.idb
+*.bsc
 
 # Chutzpah Test files
 _Chutzpah*

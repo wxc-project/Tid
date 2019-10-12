@@ -94,8 +94,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\XhCore\AlgFun;..\..\XhCore\EntList;..\..\XhCore\Ent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\..\XhCore\DrawSolid;..\..\XhCore\XeroCad;..\..\XhCore\PartLib;..\..\XhLmd\XhLdsLm;..\..\XhLmd\XhLicAgent;..\TidCore;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\XhCore\AlgFun;..\..\XhCore\EntList;..\..\XhCore\Ent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\..\XhCore\DrawSolid;..\..\XhCore\XeroCad;..\..\XhCore\PartLib;..\..\XhLmd\XhLdsLm;..\..\XhLmd\XhLicAgent;..\..\XhCore\MODCore;..\TidCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;__TID_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -106,7 +106,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;TidCore.lib;PartLib.lib;XhLdsLm2.lib;XhLicAgent2.lib;MODCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;..\..\XhCore\DrawSolid\Release;..\..\XhCore\XeroCad\Release;..\..\XhCore\PartLib\Release;..\..\XhLmd\XhLdsLm\Release2;..\..\XhLmd\XhLicAgent\Release2;..\MODCore\Release;..\TidCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore\AlgFun\Release;..\..\XhCore\Ent\Release;..\..\XhCore\EntList\Release;..\..\XhCore\DrawSolid\Release;..\..\XhCore\XeroCad\Release;..\..\XhCore\PartLib\Release;..\..\XhCore\MODCore\Release;..\..\XhLmd\XhLdsLm\Release2;..\..\XhLmd\XhLicAgent\Release2;..\TidCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
