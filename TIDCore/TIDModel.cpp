@@ -286,6 +286,69 @@ void CTidModel::InitTidDataInfo()
 			pAssmBolt->solid.nut.TransACS(ConvertCSFrom(block.lcs), ConvertCSFrom(blkassembly.acs));
 		}
 	}
+	//解析工程信息内存区
+	for (int i = 0; i < m_xProjectInfoSection.m_ciSubProjSectionCount; i++)
+	{
+		CProjInfoSubSection xSubSection= m_xProjectInfoSection.GetSubSectionAt(i);
+		CBuffer sectbuf(xSubSection.BufferPtr(), xSubSection.BufferLength());
+		if (xSubSection.m_uidSubSection == 23545686)
+		{	//GIM工程属性信息
+			sectbuf.Read(m_xGimFileHeadInfo.m_sFileTag, 16);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sFileName, 256);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sDesigner, 64);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sUnit, 256);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sSoftName, 128);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sTime, 16);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sSoftMajorVer, 8);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sSoftMinorVer, 8);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sMajorVersion, 8);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sMinorVersion, 8);
+			sectbuf.Read(m_xGimFileHeadInfo.m_sBufSize, 8);
+			//
+			sectbuf.ReadInteger(&m_xGimPropertyInfo.m_nCircuit);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fWindSpeed);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fNiceThick);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fFrontRulingSpan);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fBackRulingSpan);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fMaxSpan);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fDesignKV);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fFrequencyRockAngle);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fLightningRockAngle);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fSwitchingRockAngle);
+			sectbuf.ReadDouble(&m_xGimPropertyInfo.m_fWorkingRockAngle);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sVoltGrade);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sType);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sTexture);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sFixedType);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sTaType);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sCWireSpec);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sEWireSpec);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sWindSpan);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sWeightSpan);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sAngleRange);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sRatedHeight);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sHeightRange);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sTowerWeight);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sManuFacturer);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sMaterialCode);
+			sectbuf.ReadString(m_xGimPropertyInfo.m_sProModelCode);
+		}
+		if (xSubSection.m_uidSubSection == 11111111)
+		{	//挂点信息
+			WORD nCount = 0;
+			sectbuf.ReadWord(&nCount);
+			for (int i = 0; i < nCount; i++)
+			{
+				CTidHangPoint* pHangPoint = hashHangPoint.Add(i + 1);
+				sectbuf.SeekPosition(2 + i * 112);
+				sectbuf.ReadWord(&pHangPoint->wireNode.wiCode);
+				sectbuf.ReadPoint(pHangPoint->wireNode.position);
+				sectbuf.ReadPoint(pHangPoint->wireNode.relaHolePt[0]);
+				sectbuf.ReadPoint(pHangPoint->wireNode.relaHolePt[1]);
+				sectbuf.Read(pHangPoint->wireNode.name, 38);
+			}
+		}
+	}
 }
 int CTidModel::GetTowerTypeName(char* towerTypeName,UINT maxBufLength/*=0*/)
 {
@@ -341,12 +404,20 @@ WORD CTidModel::GetSubLegCount(BYTE ciBodySerial)
 {
 	return m_xFoundationSection.cnSubLegCount;
 }
+//获取指定呼高下某接腿的基础坐标
 bool CTidModel::GetSubLegBaseLocation(BYTE ciBodySerial,BYTE ciLegSerial,double* pos3d)
 {
 	GEPOINT pos=m_xFoundationSection.GetSubLegFoundationOrgBySerial(ciBodySerial,ciLegSerial);
 	if(pos3d!=NULL)
 		memcpy(pos3d,(double*)pos,24);
 	return true;
+}
+//获取指定呼高下某接腿的基础根开
+double CTidModel::GetSubLegBaseWidth(BYTE ciBodySerial, BYTE ciLegSerial)
+{
+	GEPOINT pos = m_xFoundationSection.GetSubLegFoundationOrgBySerial(ciBodySerial, ciLegSerial);
+	double fHalfFrontBaseWidth = pos.x;
+	return fHalfFrontBaseWidth * 2;
 }
 ISteelMaterialLibrary* CTidModel::GetSteelMatLib()
 {
@@ -718,6 +789,24 @@ BYTE CTidHangPoint::GetPosSymbol()
 			return 'H';
 	}
 }
+BYTE CTidHangPoint::GetRelaHoleNum()
+{
+	int nNum = 0;
+	if (!wireNode.relaHolePt[0].IsZero())
+		nNum++;
+	if (!wireNode.relaHolePt[1].IsZero())
+		nNum++;
+	return nNum;
+}
+TID_COORD3D CTidHangPoint::GetRelaHolePos(int index)
+{
+	if (index == 0)
+		return TID_COORD3D(wireNode.relaHolePt[0]);
+	else if(index==1)
+		return TID_COORD3D(wireNode.relaHolePt[1]);
+	else
+		return TID_COORD3D();
+}
 //////////////////////////////////////////////////////////////////////////
 // CTidHeightGroup
 int CTidHeightGroup::GetName(char *moduleName,UINT maxBufLength/*=0*/)
@@ -838,6 +927,13 @@ double CTidHeightGroup::GetBody2LegTransitZ()
 		fTransitZ = max(fTransitZ, pPart->BriefLineEnd().z);
 	}
 	return fTransitZ;
+}
+double CTidHeightGroup::GetBodyNamedHeight()
+{
+	double fBody2LegTransZ = GetBody2LegTransitZ();
+	double fNamedHeightZeroZ = m_pModel->GetNamedHeightZeroZ();
+	double fBody2LegHeight = fBody2LegTransZ - fNamedHeightZeroZ;
+	return fBody2LegHeight;
 }
 bool CTidHeightGroup::GetConfigBytes(BYTE* cfgword_bytes24)
 {

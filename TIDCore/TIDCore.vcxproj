@@ -95,13 +95,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;TIDCORE_EXPORTS;_CRT_SECURE_NO_WARNINGS;APP_EMBEDDED_MODULE;_DISABLE_DEBUG_NEW_;_DISABLE_ALG_FUNC_;DISABLE_SOLID_BODY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;..\..\XhCore\Ent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\..\XhCore\Ent;..\..\XhCore\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\XhCore\Ent\Release;..\MODCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore\Ent\Release;..\..\XhCore\MODCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_ent.lib;ModCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\TidCore.def</ModuleDefinitionFile>
       <ImportLibrary>$(IntDir)TIDCore.lib</ImportLibrary>

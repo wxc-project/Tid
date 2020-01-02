@@ -6,6 +6,7 @@
 #include "SolidBody.h"
 #include "HashTable.h"
 #include "gl/glu.h"
+#include "GimDef.h"
 
 class CTidModel;
 class CTidRawSolidEdge : public ITidRawSolidEdge{
@@ -467,6 +468,7 @@ public:
 	virtual ITidTowerInstance* GetTowerInstance(int legSerialQuad1, int legSerialQuad2, int legSerialQuad3, int legSerialQuad4);
 	virtual double GetLowestZ();
 	virtual double GetBody2LegTransitZ();
+	virtual double GetBodyNamedHeight();
 	virtual bool GetConfigBytes(BYTE* cfgword_bytes24);
 };
 //挂点
@@ -491,6 +493,8 @@ public:
 	virtual BYTE GetPostCode();			//ciPostCode		挂点附加码: 如"导1-V3"中V后面的'3'表示1号相序导线的V挂点中的第三个
 	virtual BYTE GetSerial();			//ciSerial			挂点的序号，根据挂点所在回路及回路中的相序号计算
 	virtual BYTE GetPosSymbol();		//位置标识
+	virtual BYTE GetRelaHoleNum();
+	virtual TID_COORD3D GetRelaHolePos(int index);
 };
 //塔模型
 class CTidModel : public ITidModel
@@ -522,6 +526,8 @@ private:
 	DWORD m_dwBoltCount;
 	DWORD m_dwPartCount;
 	DWORD m_dwBlockCount;
+	GIM_HEAD_PROP_ITEM m_xGimFileHeadInfo;		//GIM文件头信息
+	TOWER_PRPERTY_ITEM m_xGimPropertyInfo;		//GIM工程属性信息
 	CHashListEx<CTidHangPoint> hashHangPoint;
 	CHashListEx<CTidHeightGroup> hashHeightGroup;
 	CHashListEx<CTidNode> hashTidNode;
@@ -569,11 +575,13 @@ public:
 public:
 	//V1.4 新增属性
 	virtual double GetNamedHeightZeroZ();
-	//基础地脚螺栓信息
+	//地脚螺栓信息
 	virtual bool GetAnchorBoltSolid(CTidSolidBody* pBoltSolid,CTidSolidBody* pNutSolid);
 	virtual WORD GetBasePlateThick();
 	virtual WORD GetAnchorCount();
 	virtual bool GetAnchorAt(short index,short* psiPosX,short* psiPosY);
+	//基础信息
 	virtual WORD GetSubLegCount(BYTE ciBodySerial);
-	virtual bool GetSubLegBaseLocation(BYTE ciBodySerial,BYTE ciLegSerial,double* pos3d);
+	virtual bool GetSubLegBaseLocation(BYTE ciBodySerial, BYTE ciLegSerial, double* pos3d);
+	virtual double GetSubLegBaseWidth(BYTE ciBodySerial, BYTE ciLegSerial);	//基础根开
 };

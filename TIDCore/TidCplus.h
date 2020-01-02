@@ -316,6 +316,9 @@ struct TIDCORE_API ITidHangPoint{
 	virtual BYTE GetPostCode()=0;		//ciPostCode		挂点附加码: 如"导1-V3"中V后面的'3'表示1号相序导线的V挂点中的第三个
 	virtual BYTE GetSerial()=0;			//ciSerial			挂点的序号，根据挂点所在回路及回路中的相序号计算
 	virtual BYTE GetPosSymbol()=0;		//位置标识	0.无|Q.前侧|H.后侧
+	//挂点关联挂孔信息
+	virtual BYTE GetRelaHoleNum() = 0;
+	virtual TID_COORD3D GetRelaHolePos(int index) = 0;
 };
 //呼高
 struct ITidTowerInstance;
@@ -330,12 +333,14 @@ struct TIDCORE_API ITidHeightGroup {
 	virtual int GetLegSerial(double heightDifference) = 0;
 	//legSerial，平腿为0，各减腿依次+1,返回值为指定等级减腿与平推间的高度差(一般为负值,单位m)
 	virtual double GetLegHeightDifference(int legSerial) = 0;	//
-	//呼高计算的基础高度(一般为最低横担的Z值)
+	//呼高高度(最长腿Z值-呼高基点Z值)
 	virtual UINT GetNamedHeight() = 0;	//单位,mm(V1.4新增特性)
 	//获取呼高的最大高度(按最长腿计算)
 	virtual double GetLowestZ() = 0;
-	//获取呼高的塔身与接腿的过渡高度
+	//获取呼高的塔身与接腿的过渡Z值
 	virtual double GetBody2LegTransitZ() = 0;
+	//接身高度(塔身与接腿的过渡Z值-呼高基点Z值)
+	virtual double GetBodyNamedHeight() = 0;
 	//该呼高所包括的接腿号位信息（1~192）
 	virtual bool GetConfigBytes(BYTE* cfgword_bytes24) = 0;
 	//根据A|B|C|D配腿信息，激活塔例
@@ -410,12 +415,14 @@ struct TIDCORE_API ITidModel {
 public:	//V1.4新增特性
 	//呼高基点Z值(用户计算实际呼高高度)
 	virtual double GetNamedHeightZeroZ()=0;
-	//基础地脚螺栓信息
+	//地脚螺栓信息
 	virtual WORD GetBasePlateThick()=0;
 	virtual WORD GetAnchorCount()=0;
 	virtual bool GetAnchorAt(short index,short* psiPosX,short* psiPosY)=0;
+	//基础信息
 	virtual WORD GetSubLegCount(BYTE ciBodySerial)=0;
 	virtual bool GetSubLegBaseLocation(BYTE ciBodySerial,BYTE ciLegSerial,double* pos3d)=0;
+	virtual double GetSubLegBaseWidth(BYTE ciBodySerial, BYTE ciLegSerial) = 0;
 	//导出MOD文件
 	virtual bool ExportModFile(const char* sFileName)=0;
 };
