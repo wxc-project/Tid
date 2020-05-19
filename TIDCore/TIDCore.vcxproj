@@ -95,13 +95,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;TIDCORE_EXPORTS;_CRT_SECURE_NO_WARNINGS;APP_EMBEDDED_MODULE;_DISABLE_DEBUG_NEW_;_DISABLE_ALG_FUNC_;DISABLE_SOLID_BODY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\..\XhCore\Ent;..\..\XhCore\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\..\XhCore-dll\Ent;..\..\XhCore-dll\MODCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\XhCore\Ent\Release;..\..\XhCore\MODCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore-dll\Ent\Release;..\..\XhCore-dll\MODCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_ent.lib;ModCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\TidCore.def</ModuleDefinitionFile>
       <ImportLibrary>$(IntDir)TIDCore.lib</ImportLibrary>
@@ -132,14 +132,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;TIDCORE_EXPORTS;_CRT_SECURE_NO_WARNINGS;APP_EMBEDDED_MODULE;_DISABLE_DEBUG_NEW_;_DISABLE_ALG_FUNC_;DISABLE_SOLID_BODY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;..\..\XhCore\Ent;..\..\XhCore\MODCore;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\..\XhCore-dll\Ent;..\..\XhCore-dll\MODCore;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\XhCore\Ent\Release;..\..\XhCore\MODCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\XhCore-dll\Ent\Release;..\..\XhCore-dll\MODCore\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glu32.lib;opengl32.lib;f_ent.lib;ModCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\TidCore.def</ModuleDefinitionFile>
     </Link>
