@@ -18,7 +18,7 @@
 #pragma once
 #include "math.h"
 
-//三维坐标
+//三维坐标-单位mm
 struct TIDCORE_API TID_COORD3D{
 	double x, y, z;
 	TID_COORD3D() { x = y = z = 0; }
@@ -45,7 +45,7 @@ struct TIDCORE_API TID_COORD3D{
 		return &x;
 	}
 };
-//三维坐标系
+//三维坐标系-单位mm
 struct TIDCORE_API TID_CS{
 	TID_COORD3D origin;
 	//坐标系的X/Y/Z坐标轴, 三坐标轴遵循右手螺栓正交，且为单位化矢量
@@ -100,9 +100,9 @@ public:
 	virtual TID_COORD3D ColumnNorm() const;
 	virtual TID_COORD3D WorkNorm() const;
 	virtual TID_COORD3D Center() const;
-	virtual double Radius() const;
-	virtual double SectorAngle() const;//弧度制单位
-	virtual double Length();//圆弧长度
+	virtual double Radius() const;		//单位mm
+	virtual double SectorAngle() const;	//弧度制单位
+	virtual double Length();			//圆弧长度mm
 	virtual TID_COORD3D PositionInAngle(double posAngle);		//弧度制单位
 	virtual TID_COORD3D TangentVecInAngle(double posAngle);	//逆时针旋转为正切向方向,弧度制单位
 };
@@ -183,23 +183,23 @@ struct TIDCORE_API ITidBoltNut{
 struct TIDCORE_API IBoltSizeSpec{
 	virtual UINT GetId()=0;
 	virtual UINT GetSeriesId()=0;			//螺栓归属规格系列的标识
-	virtual short GetDiameter()=0;			//螺栓直径
-	virtual short GetLenValid()=0;			//螺栓有效长
-	virtual short GetLenNoneThread()=0;		//螺栓无扣长
+	virtual short GetDiameter()=0;			//螺栓直径(mm)
+	virtual short GetLenValid()=0;			//螺栓有效长(mm)
+	virtual short GetLenNoneThread()=0;		//螺栓无扣长(mm)
 	virtual double GetTheoryWeight()=0;		//理论重量(kg)
 	virtual short GetSpec(char* spec)=0;	//螺栓规格描述字符（含末尾0截止字符）
 	virtual ITidSolidBody* GetBoltSolid()=0;//螺栓实体	
 	virtual ITidSolidBody* GetNutSolid()=0;//螺栓实体	
 };
 struct TIDCORE_API IAnchorBoltSpec{
-	virtual short GetDiameter()=0;		//地脚螺栓名义直径
+	virtual short GetDiameter()=0;		//地脚螺栓名义直径(mm)
 	virtual short GetLenValid()=0;		//地脚螺栓出露长(mm)
 	virtual short GetLenNoneThread()=0;	//地脚螺栓无扣长(mm) <底座板厚度
-	virtual short GetPadWidth()=0;		//地脚螺栓垫板宽度
-	virtual short GetPadThick()=0;		//地脚螺栓垫板厚度
-	virtual short GetHoleD()=0;			//地脚螺栓板孔径
-	virtual short GetBasePlateHoleD()=0;//地脚螺栓连接底座板建议孔径值
-	virtual short GetBasePlateThick()=0;		//基础底板厚度
+	virtual short GetPadWidth()=0;		//地脚螺栓垫板宽度(mm)
+	virtual short GetPadThick()=0;		//地脚螺栓垫板厚度(mm)
+	virtual short GetHoleD()=0;			//地脚螺栓板孔径(mm)
+	virtual short GetBasePlateHoleD()=0;//地脚螺栓连接底座板建议孔径值(mm)
+	virtual short GetBasePlateThick()=0;		//基础底板厚度(mm)
 	virtual char* GetSizeSymbol()=0;	//地脚螺栓规格标记字符串
 };
 //螺栓系列
@@ -234,11 +234,11 @@ struct TIDCORE_API ITidPart{
 	virtual int GetPartType()=0;
 	virtual UINT GetSerialId()=0;
 	virtual char GetBriefMark()=0;
-	virtual WORD GetLength()=0;
-	virtual double GetWidth()=0;	//一般用于存储角钢肢宽、槽钢及扁铁的宽度、钢管直径、球直径等。
-	virtual double GetThick()=0;	//一般用于存储角钢肢厚、槽钢及扁铁的厚度、钢管壁厚、球壁厚等。
-	virtual double GetHeight()=0;	//一般用于存储不等肢角钢的另一肢厚或槽钢的高度等不常见参数。
-	virtual double GetWeight()=0;
+	virtual WORD GetLength()=0;		//单位mm
+	virtual double GetWidth()=0;	//单位mm,一般用于存储角钢肢宽、槽钢及扁铁的宽度、钢管直径、球直径等。
+	virtual double GetThick()=0;	//单位mm,一般用于存储角钢肢厚、槽钢及扁铁的厚度、钢管壁厚、球壁厚等。
+	virtual double GetHeight()=0;	//单位mm,一般用于存储不等肢角钢的另一肢厚或槽钢的高度等不常见参数。
+	virtual double GetWeight()=0;	//单位kg
 	virtual WORD StateFlag()=0;
 	virtual short GetSegStr(char* segstr)=0;
 	virtual short GetSpec(char* sizeSpec)=0;
@@ -336,11 +336,11 @@ struct TIDCORE_API ITidHeightGroup {
 	//呼高高度(最长腿Z值-呼高基点Z值)
 	virtual UINT GetNamedHeight() = 0;	//单位,mm(V1.4新增特性)
 	//获取呼高的最大高度(按最长腿计算)
-	virtual double GetLowestZ() = 0;
+	virtual double GetLowestZ() = 0;	//单位(mm)
 	//获取呼高的塔身与接腿的过渡Z值
-	virtual double GetBody2LegTransitZ() = 0;
+	virtual double GetBody2LegTransitZ() = 0;	//单位(mm)
 	//接身高度(塔身与接腿的过渡Z值-呼高基点Z值)
-	virtual double GetBodyNamedHeight() = 0;
+	virtual double GetBodyNamedHeight() = 0;	//单位(mm)
 	//该呼高所包括的接腿号位信息（1~192）
 	virtual bool GetConfigBytes(BYTE* cfgword_bytes24) = 0;
 	//根据A|B|C|D配腿信息，激活塔例
@@ -414,9 +414,9 @@ struct TIDCORE_API ITidModel {
 	virtual bool InitTidBuffer(const char* src_buf,long buf_len)=0;
 public:	//V1.4新增特性
 	//呼高基点Z值(用户计算实际呼高高度)
-	virtual double GetNamedHeightZeroZ()=0;
+	virtual double GetNamedHeightZeroZ()=0;	//单位(mm)
 	//地脚螺栓信息
-	virtual WORD GetBasePlateThick()=0;
+	virtual WORD GetBasePlateThick()=0;		//单位(mm)
 	virtual WORD GetAnchorCount()=0;
 	virtual bool GetAnchorAt(short index,short* psiPosX,short* psiPosY)=0;
 	//基础信息
