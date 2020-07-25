@@ -22,6 +22,7 @@
 #include "MainFrm.h"
 #include "f_alg_fun.h"
 #include "direct.h"
+#include "btc.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -543,6 +544,24 @@ void DrawSolidTower(void* pContext)
 		}
 		DisplayProcess(100,"生成单线实体...");
 	}
+#ifdef __ALFA_TEST_
+	COLORREF clr = RGB(152, 152, 152);
+	double fZeroZ = gpTidModel->GetNamedHeightZeroZ();
+	double fHeight = pTowerInstance->GetInstanceHeight();
+	double fTransZ = pTowerInstance->BelongHeightGroup()->GetBody2LegTransitZ();
+	//实际呼高
+	btc::SKETCH_PLANE sketch1, sketch2;
+	sketch1.CreateStdPlane(GEPOINT(10000,0, fZeroZ), GEPOINT(0, 0, 1), GEPOINT(1, 0, 0), 20000);
+	pView->SolidDraw()->NewWorkPlaneSketch(1, clr, sketch1.pVertexArr, sketch1.VertexCount, sketch1.normal, "呼高");
+	sketch2.CreateStdPlane(GEPOINT(10000,0, fHeight), GEPOINT(0, 0, -1), GEPOINT(1, 0, 0), 20000);
+	pView->SolidDraw()->NewWorkPlaneSketch(2, clr, sketch2.pVertexArr, sketch2.VertexCount, sketch2.normal,CXhChar16("%g",fHeight-fZeroZ));
+	//接身高
+	btc::SKETCH_PLANE sketch3, sketch4;
+	sketch3.CreateStdPlane(GEPOINT(-10000, 0, fZeroZ), GEPOINT(0, 0, 1), GEPOINT(1, 0, 0), 20000);
+	pView->SolidDraw()->NewWorkPlaneSketch(3, clr, sketch3.pVertexArr, sketch3.VertexCount, sketch3.normal, "接身高");
+	sketch4.CreateStdPlane(GEPOINT(-10000, 0, fTransZ), GEPOINT(0, 0, -1), GEPOINT(1, 0, 0), 20000);
+	pView->SolidDraw()->NewWorkPlaneSketch(4, clr, sketch4.pVertexArr, sketch4.VertexCount, sketch4.normal,CXhChar16("%g", fTransZ - fZeroZ));
+#endif
 	//绘制挂点信息
 	for (DWORD i = 0; i < gpTidModel->HangPointCount(); i++)
 	{

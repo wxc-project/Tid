@@ -70,7 +70,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(Configuration)\</OutDir>
+    <OutDir>..\TID\$(Configuration)\</OutDir>
     <TargetName>TIDCore</TargetName>
     <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>

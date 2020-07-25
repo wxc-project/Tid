@@ -28,6 +28,7 @@ static BYTE ValidateSchema(BYTE schema)
 		return 1;
 }
 BYTE CFGWORD::MULTILEG_SCHEMA = 1;	//CFGLEG::MULTILEG_MAX08=1
+UDF_MULTILEG_SCHEMA CFGWORD::xUdfSchema;
 CFGWORD::CFGWORD(int iBodyNo,int iLegNo,BYTE schema/*=0*/)
 {
 	iBodyNo=min(MaxBodys(schema),iBodyNo);
@@ -67,6 +68,8 @@ BYTE CFGWORD::SetSchema(BYTE cbMultiLegSchema)
 }
 BYTE CFGWORD::MaxLegs(BYTE schema/*=0*/)	//Ö¸¶¨Ä£Ê½Ö§³Ö×î¶àºô¸ß½ÓÍÈÊýMULTILEG_DEFAULT=0
 {
+	if (schema==MULTILEG_UDF)
+		return xUdfSchema.MaxLegs();
 	switch(schema)
 	{
 	case 1://MULTILEG_MAX08:
@@ -81,6 +84,8 @@ BYTE CFGWORD::MaxLegs(BYTE schema/*=0*/)	//Ö¸¶¨Ä£Ê½Ö§³Ö×î¶àºô¸ß½ÓÍÈÊýMULTILEG_DE
 }
 BYTE CFGWORD::MaxBodys(BYTE schema/*=0*/)	//Ö¸¶¨Ä£Ê½Ö§³Ö×î¶àºô¸ß±¾ÌåÊýMULTILEG_DEFAULT=0
 {
+	if (schema==MULTILEG_UDF)
+		return xUdfSchema.cnHeightCount;
 	switch(schema)
 	{
 	case 1://MULTILEG_MAX08:
@@ -92,6 +97,56 @@ BYTE CFGWORD::MaxBodys(BYTE schema/*=0*/)	//Ö¸¶¨Ä£Ê½Ö§³Ö×î¶àºô¸ß±¾ÌåÊýMULTILEG_D
 	default:
 		return 24;
 	}
+}
+bool UDF_MULTILEG_SCHEMA::AllocHeightSchema(BYTE* xarrHeightLegCount,int niHeightCount)
+{
+	if (niHeightCount<1||niHeightCount>24)
+		return false;
+	cnHeightCount=(BYTE)niHeightCount;
+	UDF_MULTILEG_SCHEMA copy=*this;
+	int i,niSummLegCount=0;
+	for (i=0;i<niHeightCount&&niSummLegCount<192;i++)
+	{
+		xarrHeights[i].ciStartAddr=niSummLegCount;
+		xarrHeights[i].cnBodyLegs=xarrHeightLegCount[i];
+		niSummLegCount+=xarrHeightLegCount[i];
+	}
+	return i==niHeightCount;
+}
+int UDF_MULTILEG_SCHEMA::MaxLegs() const
+{
+	int nMaxLegs=1;
+	for (BYTE i=0;i<cnHeightCount;i++)
+		nMaxLegs=max(nMaxLegs,xarrHeights[i].cnBodyLegs);
+	return nMaxLegs;
+}
+BYTE CFGWORD::MaxLegOfBody(WORD wiBodySerial)
+{	//Ö¸¶¨ºô¸ßÐòºÅ×î¶àÈÝÄÉµÄ½ÓÍÈÊý
+	if (MULTILEG_SCHEMA==MULTILEG_UDF)
+	{
+		if (wiBodySerial==0)
+			return 0;
+		if (wiBodySerial<=xUdfSchema.cnHeightCount)
+			return xUdfSchema.xarrHeights[wiBodySerial-1].cnBodyLegs;
+		else
+			return 0;
+	}
+	else if (MULTILEG_SCHEMA>=MULTILEG_MAX08&&MULTILEG_SCHEMA<=MULTILEG_MAX24)
+	{
+		switch (MULTILEG_SCHEMA)
+		{
+		case MULTILEG_MAX08:
+			return 8;
+		case MULTILEG_MAX16:
+			return 16;
+		case MULTILEG_MAX24:
+			return 24;
+		default:
+			return 8;
+		}
+	}
+	else
+		return 0;
 }
 
 BOOL CFGWORD::IsHasBodyNoOnly(int iBodyNo,BYTE schema/*=0*/)	//Åä²Ä×ÖÖÐÊÇ·ñ½öÖ¸¶¨×Ö½ÚÊÇÓÐÖµ£¬¼´²»Îª0£¬iByteÒÔ1Îª»ùÊý(¼´Ë÷ÒýÖµ+1)
@@ -105,7 +160,14 @@ BOOL CFGWORD::IsHasBodyNoOnly(int iBodyNo,BYTE schema/*=0*/)	//Åä²Ä×ÖÖÐÊÇ·ñ½öÖ¸¶
 		for(i=1;i<=nMaxBodies;i++)
 		{
 			DWORD legword=0;
-			memcpy(&legword,&flag.bytes[(i-1)*schema],schema);
+			if (schema==MULTILEG_UDF)
+			{
+				BYTE ciStartAddr=xUdfSchema.xarrHeights[i-1].ciStartAddr;
+				BYTE ciBodyLegs=xUdfSchema.xarrHeights[i-1].cnBodyLegs;
+				legword=SubDword(ciStartAddr,ciBodyLegs);
+			}
+			else
+				memcpy(&legword,&flag.bytes[(i-1)*schema],schema);
 			if(i==iBodyNo&&legword==0)
 				return FALSE;
 			else if(i!=iBodyNo&&legword>0)
@@ -120,7 +182,14 @@ BOOL CFGWORD::IsHasBodyNo(int iBodyNo,BYTE schema/*=0*/)		//Åä²Ä×ÖÖÐÖ¸¶¨×Ö½ÚÊÇ·ñ
 		return FALSE;
 	schema=ValidateSchema(schema);
 	DWORD legword=0;
-	memcpy(&legword,&flag.bytes[(iBodyNo-1)*schema],schema);
+	if (schema==MULTILEG_UDF)
+	{
+		BYTE ciStartAddr=xUdfSchema.xarrHeights[iBodyNo-1].ciStartAddr;
+		BYTE ciBodyLegs=xUdfSchema.xarrHeights[iBodyNo-1].cnBodyLegs;
+		legword=SubDword(ciStartAddr,ciBodyLegs);
+	}
+	else
+		memcpy(&legword,&flag.bytes[(iBodyNo-1)*schema],schema);
 	if(legword>0)
 		return TRUE;
 	else
@@ -137,6 +206,19 @@ BOOL CFGWORD::AddBodyLegs(int iBodyNo,DWORD legword/*=0xffffff*/,BYTE schema/*=0
 		legword&=0xffff;
 	else if(schema==MULTILEG_MAX24)
 		legword&=0xffffff;
+	else if (schema==MULTILEG_UDF)
+	{
+		BYTE cnMaxLegs=MaxLegOfBody(iBodyNo);
+		DWORD dwFullFlag=0;
+		for(BYTE i=0;i<cnMaxLegs;i++)
+		{
+			dwFullFlag<<=1;
+			dwFullFlag|=0x00000001;
+		}
+		legword&=dwFullFlag;
+		AddBits(legword,xUdfSchema.xarrHeights[iBodyNo-1].ciStartAddr,cnMaxLegs);
+		return TRUE;
+	}
 	BYTE* bytes=(BYTE*)&legword;
 	for(int j=0;j<schema;j++)
 		flag.bytes[(iBodyNo-1)*schema+j]|=bytes[j];
@@ -156,11 +238,87 @@ BOOL CFGWORD::SetBodyLegs(int iBodyNo,DWORD legword/*=0xffffff*/,BYTE schema/*=0
 		legword&=0xffff;
 	else if(schema==MULTILEG_MAX24)
 		legword&=0xffffff;
+	else if (schema==MULTILEG_UDF)
+	{
+		BYTE cnMaxLegs=MaxLegOfBody(iBodyNo);
+		DWORD dwFullFlag=0;
+		for(BYTE i=0;i<cnMaxLegs;i++)
+		{
+			dwFullFlag<<=1;
+			dwFullFlag|=0x00000001;
+		}
+		legword&=dwFullFlag;
+		SetBits(legword,xUdfSchema.xarrHeights[iBodyNo-1].ciStartAddr,cnMaxLegs);
+		return TRUE;
+	}
 	memcpy(&flag.bytes[(iBodyNo-1)*schema],&legword,schema);
 	if(legword>0)
 		return TRUE;
 	else
 		return FALSE;
+}
+DWORD CFGWORD::SubDword(UINT uiStartAddr,UINT nBitCount)
+{
+	DWORD dwSubWord=0;
+	UINT index=uiStartAddr;
+	long liLeastBitCount=nBitCount;
+	BYTE xarrConstMaskBytes[8]={ 0x01,0x03,0x07,0x0f,0x1f,0x3f,0x7f,0xff };
+	int indicator=0;
+	while(liLeastBitCount>0)
+	{
+		UINT uiByteIndex=index/8;
+		UINT uiBitIndex =index%8;
+		DWORD dwBits=flag.bytes[uiByteIndex];
+		if(uiBitIndex>0)
+			dwBits>>=uiBitIndex;
+		UINT uiCopyBits=min(8-(int)uiBitIndex,liLeastBitCount);	//µ±Ç°Ñ­»·¿½±´µÄbitÊý
+		dwBits&=xarrConstMaskBytes[uiCopyBits-1];
+		dwBits<<=indicator;
+		dwSubWord|=dwBits;
+		indicator+=uiCopyBits;
+		index+=uiCopyBits;
+		liLeastBitCount-=uiCopyBits;
+	}
+	return dwSubWord;
+}
+bool CFGWORD::AddBits(DWORD dwBits,UINT uiStartBitAddr,UINT nBitCount)	//uiStartAddrÒÔ0ÎªÆðÊ¼µØÖ·Ë÷Òý
+{
+	__int64 ui64Bits=dwBits;
+	UINT uiAddrByteIndex=uiStartBitAddr/8;
+	UINT uiAddrBitOffset=uiStartBitAddr%8;
+	int niBytesCount=uiAddrBitOffset+nBitCount<=32?4:5;
+	ui64Bits<<=uiAddrBitOffset;
+	BYTE* pcbByte=(BYTE*)&ui64Bits;
+	for (int i=0;i<niBytesCount&&i+uiAddrByteIndex<24;i++,pcbByte++)
+		flag.bytes[i+uiAddrByteIndex]|=*pcbByte;
+	return true;
+}
+bool CFGWORD::SetBits(DWORD dwBits,UINT uiStartBitAddr,UINT nBitCount)	//uiStartAddrÒÔ0ÎªÆðÊ¼µØÖ·Ë÷Òý
+{
+	__int64 ui64Bits=dwBits;
+	UINT uiAddrByteIndex=uiStartBitAddr/8;
+	UINT uiAddrBitOffset=uiStartBitAddr%8;
+	int niBytesCount=uiAddrBitOffset+nBitCount<=32?4:5;
+	ui64Bits<<=uiAddrBitOffset;
+	BYTE* pcbByte=(BYTE*)&ui64Bits;
+	BYTE cbNowHeadByte=flag.bytes[uiAddrByteIndex];
+	BYTE cbNowTailByte=flag.bytes[uiAddrByteIndex+niBytesCount-1];
+	for (int i=0;i<niBytesCount&&i+uiAddrByteIndex<24;i++,pcbByte++)
+		flag.bytes[i+uiAddrByteIndex]=*pcbByte;
+	if (uiAddrBitOffset>0)
+	{
+		BYTE xarrLowBitsMask[8]={ 0x01,0x03,0x07,0x0f,0x1f,0x3f,0x7f,0xff };
+		cbNowHeadByte&=xarrLowBitsMask[uiAddrBitOffset];
+	}
+	UINT uiAddrBitOfTailByteLeast=(uiAddrBitOffset+nBitCount)%8;
+	if(uiAddrBitOfTailByteLeast>0)
+	{
+		BYTE xarrHighBitsMask[8]={ 0xff,0xf7,0xf3,0xf1,0xf0,0x70,0x30,0x10 };
+		cbNowTailByte&=xarrHighBitsMask[uiAddrBitOfTailByteLeast];
+	}
+	flag.bytes[uiAddrByteIndex]|=cbNowHeadByte;
+	flag.bytes[uiAddrByteIndex+niBytesCount-1]|=cbNowTailByte;
+	return false;
 }
 CFGWORD CFGWORD::SetWordByNo(int iNo)			//¸ù¾ÝÖ¸¶¨µÄiNoºÅÎ»Ö¸¶¨Åä²Ä×Ö
 {

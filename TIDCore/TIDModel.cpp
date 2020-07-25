@@ -610,30 +610,25 @@ bool CTidModel::ExportModFile(const char* sFileName)
 	return false;
 #else
 	IModModel* pModModel=CModModelFactory::CreateModModel();
-	//计算MOD模型的坐标系
-	double fMaxNodeZ=0;
-	UINT uCount=m_xNodeSection.NodeCount();
-	for(UINT i=0;i<uCount;i++)
-	{
-		NODE_ASSEMBLY node;
-		m_xNodeSection.GetNodeByIndexId(i+1,true,node);
-		if(fMaxNodeZ<node.xPosition.z)
-			fMaxNodeZ=node.xPosition.z;
-	}
-	pModModel->SetTowerHeight(fMaxNodeZ);
-	GECS ucs=TransToUcs(pModModel->BuildUcsByModCS());
 	//提取MOD呼高信息，建立MOD坐标系
+	double fTowerHeight = 0;
 	for(int i=0;i<HeightGroupCount();i++)
 	{
 		CTidHeightGroup* pModule=(CTidHeightGroup*)GetHeightGroupAt(i);
+		double fModuleMaxZ = pModule->GetLowestZ();
+		if (fTowerHeight < fModuleMaxZ)
+			fTowerHeight = fModuleMaxZ;
 		//
 		IModHeightGroup* pHeightGroup=pModModel->AppendHeightGroup(pModule->GetSerialId());
 		pHeightGroup->SetBelongModel(pModModel);
-		pHeightGroup->SetLowestZ(pModule->GetLowestZ());
+		pHeightGroup->SetLowestZ(fModuleMaxZ);
 		pHeightGroup->SetLegCfg(pModule->module.m_dwLegCfgWord.flag.bytes);
 		pHeightGroup->SetNameHeight(pModule->GetNamedHeight());
 	}
+	pModModel->SetTowerHeight(fTowerHeight);
+	GECS ucs = TransToUcs(pModModel->BuildUcsByModCS());
 	//提取节点信息
+	UINT uCount = m_xNodeSection.NodeCount();
 	for(UINT i=0;i<uCount;i++)
 	{
 		NODE_ASSEMBLY node;
@@ -650,6 +645,7 @@ bool CTidModel::ExportModFile(const char* sFileName)
 		else
 			pModNode->SetLayer('B');	//塔身Body
 	}
+	//提取杆件信息
 	uCount=m_xAssemblyParts.AssemblyCount();
 	for(UINT i=0;i<uCount;i++)
 	{
@@ -662,7 +658,6 @@ bool CTidModel::ExportModFile(const char* sFileName)
 		IModNode* pModNodeE=pModModel->FindNode(assemble.uiEndPointI);
 		if(pModNodeS==NULL || pModNodeE==NULL)
 			continue;	//短角钢
-		
 		IModRod* pModRod=pModModel->AppendRod(i+1);
 		pModRod->SetBelongModel(pModModel);
 		pModRod->SetNodeS(pModNodeS);
@@ -703,13 +698,15 @@ bool CTidModel::ExportModFile(const char* sFileName)
 		pHangNode->m_ciWireType=pHangPt->GetWireType();
 	}
 	//初始化多胡高塔型的MOD结构
-	pModModel->InitMultiModData();
-	//生成Mod文件
-	FILE *fp=fopen(sFileName,"wt,ccs=UTF-8");
-	if(fp==NULL)
-		return false;
-	pModModel->WriteModFileByUtf8(fp);
-	return true;
+	if (pModModel->InitMultiModData())
+	{
+		FILE *fp = fopen(sFileName, "wt,ccs=UTF-8");
+		if (fp == NULL)
+			return false;
+		pModModel->WriteModFileByUtf8(fp);
+		return true;
+	}
+	return false;
 #endif
 }
 //////////////////////////////////////////////////////////////////////////
@@ -878,8 +875,20 @@ int CTidHeightGroup::GetLegSerial(double heightDifference)
 	int level_height =module.m_cbLegInfo&0x3f;	//分米
 	if(level_height==0)
 		level_height=15;
-	heightDifference*=10;
-	int nLevel=f2i(heightDifference)/level_height;	//高度落差级数
+	int nLevel=f2i(heightDifference*10)/level_height;	//高度落差级数
+	if(init_level==3)
+	{
+		for (int i=0;i<24;i++)
+		{
+			char ciLegSerial=abs(module.xarrUdfLegs[i].ciLegSerial);
+			int sign=module.xarrUdfLegs[i].ciLegSerial>0?-1:1;
+			double reduction=sign*module.xarrUdfLegs[i].wiReduction*0.1;
+			if (fabs(reduction-heightDifference)<5)
+				return ciLegSerial;
+			else if (module.xarrUdfLegs[i].ciLegSerial==0)
+				break;
+		}
+	}
 	return (init_level+1-nLevel);
 }
 double CTidHeightGroup::GetLegHeightDifference(int legSerial)
@@ -888,6 +897,16 @@ double CTidHeightGroup::GetLegHeightDifference(int legSerial)
 	int level_height =module.m_cbLegInfo&0x3f;	//分米
 	if(level_height==0)
 		level_height=15;
+	if(init_level==3)
+	{
+		for (int i=0;i<24;i++)
+		{
+			if (abs(module.xarrUdfLegs[i].ciLegSerial)==legSerial)
+				return module.xarrUdfLegs[i].ciLegSerial>0?-module.xarrUdfLegs[i].wiReduction*0.1:module.xarrUdfLegs[i].wiReduction*0.1;
+			else if (module.xarrUdfLegs[i].ciLegSerial==0)
+				break;
+		}
+	}
 	return (init_level+1-legSerial)*level_height*0.1;
 }
 ITidTowerInstance* CTidHeightGroup::GetTowerInstance(int legSerialQuad1, int legSerialQuad2, int legSerialQuad3, int legSerialQuad4)

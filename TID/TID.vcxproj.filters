@@ -99,6 +99,9 @@
     <ClCompile Include="..\..\ToolKits\ToolCode\XhCharString.cpp">
       <Filter>ToolCode</Filter>
     </ClCompile>
+    <ClCompile Include="btc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ToolKits\ToolCode\XhCharString.h">
       <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="btc.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

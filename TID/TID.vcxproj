@@ -65,7 +65,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\XhCore-dll\AlgFun;..\..\XhCore-dll\EntList;..\..\XhCore-dll\Ent;..\..\XhCore-dll\DrawSolid;..\..\XhCore-dll\XeroCad;..\..\XhCore-dll\PartLib;..\..\XhCore-dll\MODCore;..\..\XhLmd-dll\XhLdsLm;..\..\XhLmd-dll\XhLicAgent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\TidCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;__TID_;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;__TID_;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;__ALFA_TEST_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -139,6 +139,7 @@
     <ClCompile Include="..\..\ToolKits\TowerCad\SegI.cpp" />
     <ClCompile Include="..\..\ToolKits\TowerCad\TIDBuffer.cpp" />
     <ClCompile Include="AssemblePart.cpp" />
+    <ClCompile Include="btc.cpp" />
     <ClCompile Include="DisplayPartProperty.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ProcBarDlg.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="..\..\ToolKits\TowerCad\TIDBuffer.h" />
     <ClInclude Include="..\ToolCode\BufferStack.h" />
     <ClInclude Include="AssemblePart.h" />
+    <ClInclude Include="btc.h" />
     <ClInclude Include="CommandDefOper.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="ldsptr_list.h" />
