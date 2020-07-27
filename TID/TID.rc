@@ -64,7 +64,9 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\TID.ico"
+
 IDR_TIDTYPE             ICON                    "res\\TIDDoc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -72,7 +74,11 @@ IDR_TIDTYPE             ICON                    "res\\TIDDoc.ico"
 //
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
 IDB_IL_PROJECT          BITMAP                  "res\\il_file.bmp"
+
+IDB_BMP_BODY_QUAD       BITMAP                  "res\\body_quad.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -289,16 +295,23 @@ BEGIN
     CONTROL         "",IDC_TREE_CTRL,"SysTreeView32",WS_HSCROLL | WS_TABSTOP,7,7,126,168
 END
 
-IDD_SET_ACTIVE_ITEM_DLG DIALOG 0, 0, 183, 101
+IDD_SET_ACTIVE_MODULE_DLG DIALOGEX 0, 0, 211, 61
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "设定当前绘制模型"
-FONT 10, "宋体"
+CAPTION "设定当前绘制呼高组"
+FONT 9, "宋体", 0, 0, 0x1
 BEGIN
-    LTEXT           "当前象限接腿列表:",IDC_S_PROMPT,7,7,67,8
-    LISTBOX         IDC_LIST_VALID_ITEM,7,20,52,74,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "模型描述：",IDC_S_DESCRIPTION,64,20,47,74
-    DEFPUSHBUTTON   "激活",IDOK,126,7,50,14
-    PUSHBUTTON      "取消",IDCANCEL,126,24,50,14
+    LTEXT           "当前呼高:",IDC_S_HEIGHT_NAME,7,7,99,8
+    DEFPUSHBUTTON   "激活",IDOK,153,19,50,14
+    PUSHBUTTON      "取消",IDCANCEL,153,40,50,14
+    LTEXT           "呼高-配腿(A,B,C,D)：",-1,8,24,93,9
+    COMBOBOX        IDC_CMB_LEG_QUAD_A,7,42,26,88,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "-",-1,34,45,9,9
+    COMBOBOX        IDC_CMB_LEG_QUAD_B,44,42,26,105,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "-",-1,71,45,9,9
+    COMBOBOX        IDC_CMB_LEG_QUAD_C,81,42,26,116,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "-",-1,108,45,9,9
+    COMBOBOX        IDC_CMB_LEG_QUAD_D,118,42,26,121,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         IDB_BMP_BODY_QUAD,-1,"Static",SS_BITMAP,113,7,32,32
 END
 
 
@@ -378,8 +391,12 @@ BEGIN
         BOTTOMMARGIN, 175
     END
 
-    IDD_SET_ACTIVE_ITEM_DLG, DIALOG
+    IDD_SET_ACTIVE_MODULE_DLG, DIALOG
     BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 203
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 54
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -391,26 +408,47 @@ END
 //
 
 IDC_DRAW_PENCIL         CURSOR                  "res\\PENCIL.CUR"
+
 IDC_DRAW_CROSS_REC      CURSOR                  "res\\cur00003.cur"
+
 IDC_DRAW_CROSS          CURSOR                  "res\\CROSS.CUR"
+
 IDC_DRAW_ARROW_PENCIL   CURSOR                  "res\\draw_cro.cur"
+
 IDC_DRAW_ARROW_CROSS    CURSOR                  "res\\draw_arr.cur"
+
 IDC_ARROW_ZOOM_WND      CURSOR                  "res\\arrow_dr.cur"
+
 IDC_ARROW_ZOOM          CURSOR                  "res\\arrow_no.cur"
+
 IDC_ARROW_ROTATE        CURSOR                  "res\\cur00002.cur"
+
 IDC_ARROW_RECT          CURSOR                  "res\\arrow_zo.cur"
+
 IDC_ARROW_POINT         CURSOR                  "res\\arrow1.cur"
+
 IDC_ARROW_PAN_MOVE      CURSOR                  "res\\MOVE4WAY.CUR"
+
 IDC_ARROW_OSNAP         CURSOR                  "res\\cur00001.cur"
+
 IDC_ARROW_NORMAL        CURSOR                  "res\\NORMAL01.CUR"
+
 IDC_ARROW_LINK          CURSOR                  "res\\arrow_li.cur"
+
 IDC_ARROW_LINE_END      CURSOR                  "res\\cursor_l.cur"
+
 IDC_ARROW_LINE          CURSOR                  "res\\arrow2.cur"
+
 IDC_ARROW_DRAG_MOVE     CURSOR                  "res\\DRAGMOVE.CUR"
+
 IDC_ARROW_DRAG_LINK     CURSOR                  "res\\DRAGLINK.CUR"
+
 IDC_ARROW_DRAG_COPY     CURSOR                  "res\\DRAGCOPY.CUR"
+
 IDC_ARROW_CIRCLE        CURSOR                  "res\\arrow_po.cur"
+
 IDC_ARROW_ARC           CURSOR                  "res\\arrow_ci.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -421,6 +459,17 @@ IDD_TOWER_PROPERTY_DLG DLGINIT
 BEGIN
     IDC_CMB_SELECT_OBJECT_INFO, 0x403, 7, 0
 0xdece, 0xa1d1, 0xf1d4, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_SET_ACTIVE_MODULE_DLG AFX_DIALOG_LAYOUT
+BEGIN
     0
 END
 

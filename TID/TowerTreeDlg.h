@@ -123,32 +123,6 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
-class CMaxDouble{
-	bool inited;
-public:
-	double number;
-	void* m_pRelaObj;
-	CMaxDouble(){inited=false;m_pRelaObj=NULL;}
-	CMaxDouble(double init_val,void* pRelaObj=NULL){inited=true;number=init_val;m_pRelaObj=pRelaObj;}
-	operator double(){return number;}
-	bool IsInited() const{return inited;}
-	double Update(double val,void* pRelaObj=NULL,double tolerance=0)
-	{
-		if(!inited)
-		{
-			number=val;
-			inited=true;
-			m_pRelaObj=pRelaObj;
-		}
-		else if(number<val-tolerance)
-		{
-			number=val;
-			m_pRelaObj=pRelaObj;
-		}
-		return number;
-	}
-};
-
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

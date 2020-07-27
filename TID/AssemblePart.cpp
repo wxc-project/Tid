@@ -100,69 +100,69 @@ int CAssemblePart::GetPropValueStr(long id, char *valueStr,UINT nMaxStrBufLen/*=
 			sText.Copy(CXhChar100(acs.origin));
 		else if(GetPropID("acs.origin.x")==id)
 		{
-			sprintf(sText,"%f",acs.origin.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.origin.y")==id)
 		{
-			sprintf(sText,"%f",acs.origin.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.origin.z")==id)
 		{
-			sprintf(sText,"%f",acs.origin.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX")==id)
 			sText.Copy(CXhChar100(acs.axisX));
 		else if(GetPropID("acs.axisX.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY")==id)
 			sText.Copy(CXhChar100(acs.axisY));
 		else if(GetPropID("acs.axisY.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ")==id)
 			sText.Copy(CXhChar100(acs.axisZ));
 		else if(GetPropID("acs.axisZ.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("m_sLayer")==id)
 			m_pAssemblePart->GetLayer(sText);
@@ -228,69 +228,69 @@ int CAssembleBolt::GetPropValueStr(long id, char *valueStr,UINT nMaxStrBufLen/*=
 			sText.Copy(CXhChar100(acs.origin));
 		else if(GetPropID("acs.origin.x")==id)
 		{
-			sprintf(sText,"%f",acs.origin.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.origin.y")==id)
 		{
-			sprintf(sText,"%f",acs.origin.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.origin.z")==id)
 		{
-			sprintf(sText,"%f",acs.origin.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX")==id)
 			sText.Copy(CXhChar100(acs.axisX));
 		else if(GetPropID("acs.axisX.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY")==id)
 			sText.Copy(CXhChar100(acs.axisY));
 		else if(GetPropID("acs.axisY.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ")==id)
 			sText.Copy(CXhChar100(acs.axisZ));
 		else if(GetPropID("acs.axisZ.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.z);
+			//SimplifiedNumString(sText);
 		}
 	}
 	if(valueStr)
@@ -368,69 +368,69 @@ int CAssembleAnchorBolt::GetPropValueStr(long id, char *valueStr,UINT nMaxStrBuf
 			sText.Copy(CXhChar100(acs.origin));
 		else if(GetPropID("acs.origin.x")==id)
 		{
-			sprintf(sText,"%f",acs.origin.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.origin.y")==id)
 		{
-			sprintf(sText,"%f",acs.origin.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.origin.z")==id)
 		{
-			sprintf(sText,"%f",acs.origin.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.origin.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX")==id)
 			sText.Copy(CXhChar100(acs.axisX));
 		else if(GetPropID("acs.axisX.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisX.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisX.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisX.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY")==id)
 			sText.Copy(CXhChar100(acs.axisY));
 		else if(GetPropID("acs.axisY.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisY.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisY.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisY.z);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ")==id)
 			sText.Copy(CXhChar100(acs.axisZ));
 		else if(GetPropID("acs.axisZ.x")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.x);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.x);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ.y")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.y);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.y);
+			//SimplifiedNumString(sText);
 		}
 		else if(GetPropID("acs.axisZ.z")==id)
 		{
-			sprintf(sText,"%f",acs.axisZ.z);
-			SimplifiedNumString(sText);
+			sprintf(sText,"%g",acs.axisZ.z);
+			//SimplifiedNumString(sText);
 		}
 	}
 	if(valueStr)

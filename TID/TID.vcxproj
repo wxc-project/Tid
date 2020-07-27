@@ -64,7 +64,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\XhCore-dll\AlgFun;..\..\XhCore-dll\EntList;..\..\XhCore-dll\Ent;..\..\XhCore-dll\DrawSolid;..\..\XhCore-dll\XeroCad;..\..\XhCore-dll\PartLib;..\..\XhCore-dll\MODCore;..\..\XhLmd-dll\XhLdsLm;..\..\XhLmd-dll\XhLicAgent;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\TidCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\XhCore-dll\AlgFun;..\..\XhCore-dll\EntList;..\..\XhCore-dll\Ent;..\..\XhCore-dll\DrawSolid;..\..\XhCore-dll\XeroCad;..\..\XhCore-dll\PartLib;..\..\XhCore-dll\MODCore;..\..\ToolKits\ToolCode;..\..\ToolKits\TowerCad;..\TidCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;__TID_;_AGILITY_DRAW;APP_EMBEDDED_MODULE;NEW_VERSION_TIDCORE;_CRT_SECURE_NO_WARNINGS;__ALFA_TEST_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -76,8 +76,8 @@
       <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;PartLib.lib;XhLdsLm2.lib;XhLicAgent2.lib;MODCore.lib;TidCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\XhCore-dll\AlgFun\Release;..\..\XhCore-dll\Ent\Release;..\..\XhCore-dll\EntList\Release;..\..\XhCore-dll\DrawSolid\Release;..\..\XhCore-dll\XeroCad\Release;..\..\XhCore-dll\PartLib\Debug;..\..\XhLmd-dll\XhLdsLm\Release2;..\..\XhLmd-dll\XhLicAgent\Release2;..\..\XhCore-dll\MODCore\Debug;..\TidCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;f_alg_fun.lib;f_ent.lib;f_ent_list.lib;XeroCad.lib;DrawSolid.lib;PartLib.lib;MODCore.lib;TidCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\XhCore-dll\AlgFun\Release;..\..\XhCore-dll\Ent\Release;..\..\XhCore-dll\EntList\Release;..\..\XhCore-dll\DrawSolid\Release;..\..\XhCore-dll\XeroCad\Release;..\..\XhCore-dll\PartLib\Debug;..\..\XhCore-dll\MODCore\Debug;..\TidCore\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -137,13 +137,12 @@
     <ClCompile Include="..\..\ToolKits\ToolCode\XhCharString.cpp" />
     <ClCompile Include="..\..\ToolKits\TowerCad\ParseAdaptNo.cpp" />
     <ClCompile Include="..\..\ToolKits\TowerCad\SegI.cpp" />
-    <ClCompile Include="..\..\ToolKits\TowerCad\TIDBuffer.cpp" />
     <ClCompile Include="AssemblePart.cpp" />
     <ClCompile Include="btc.cpp" />
     <ClCompile Include="DisplayPartProperty.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ProcBarDlg.cpp" />
-    <ClCompile Include="SetActiveItemDlg.cpp" />
+    <ClCompile Include="SetActiveHeightLegsDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -168,7 +167,6 @@
     <ClInclude Include="..\..\ToolKits\ToolCode\XhCharString.h" />
     <ClInclude Include="..\..\ToolKits\TowerCad\ParseAdaptNo.h" />
     <ClInclude Include="..\..\ToolKits\TowerCad\SegI.h" />
-    <ClInclude Include="..\..\ToolKits\TowerCad\TIDBuffer.h" />
     <ClInclude Include="..\ToolCode\BufferStack.h" />
     <ClInclude Include="AssemblePart.h" />
     <ClInclude Include="btc.h" />
@@ -178,7 +176,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="ProcBarDlg.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SetActiveItemDlg.h" />
+    <ClInclude Include="SetActiveHeightLegsDlg.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TID.h" />
     <ClInclude Include="TIDDoc.h" />

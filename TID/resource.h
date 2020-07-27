@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by TID.rc
+// Microsoft Visual C++ 生成的包含文件。
+// 供 TID.rc 使用
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -25,25 +25,29 @@
 #define IDC_DRAW_PENCIL                 148
 #define IDC_DRAW_CROSS                  149
 #define IDC_DRAW_ARROW_PENCIL           150
-#define IDD_SET_ACTIVE_ITEM_DLG         150
 #define IDC_DRAW_CROSS_REC              151
+#define IDD_SET_ACTIVE_MODULE_DLG       151
 #define IDC_ARROW_LINK                  152
+#define IDB_BMP_BODY_QUAD               266
 #define IDD_TOWER_PROPERTY_DLG          415
 #define IDC_ARROW_ZOOM_WND              1000
 #define IDC_ARROW_ZOOM                  1001
+#define IDC_S_HEIGHT_NAME               1001
 #define IDC_ARROW_ROTATE                1002
 #define IDC_ARROW_PAN_MOVE              1003
 #define IDC_ARROW_NORMAL                1004
 #define IDC_DRAW_ARROW_CROSS            1005
 #define IDC_ARROW_ARC                   1006
-#define IDC_LIST_VALID_ITEM             1071
-#define IDC_S_PROMPT                    1072
-#define IDC_S_DESCRIPTION               1073
+#define IDC_CMB_LEG_QUAD_A              1058
+#define IDC_CMB_LEG_QUAD_B              1059
+#define IDC_CMB_LEG_QUAD_C              1060
+#define IDC_CMB_LEG_QUAD_D              1061
 #define IDC_TAB_GROUP                   1080
 #define IDC_CMB_SELECT_OBJECT_INFO      1121
 #define IDC_PROGRESS_BAR                1185
 #define IDC_NUMERIC_PROC                1186
 #define IDC_LIST_BOX                    1386
+#define IDC_CMB_MODULE_NO               1391
 #define IDC_TREE_CTRL                   1545
 #define IDC_E_PROP_HELP_STR             1546
 #define IDC_S_PROP_HELP_PIC             1609
@@ -131,9 +135,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        136
+#define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32793
-#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

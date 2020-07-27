@@ -135,6 +135,7 @@ void CTIDDoc::DeleteContents()
 		if(pSolidDraw)
 			pSolidDraw->EmptyDisplayBuffer();
 	}
+	theApp.hashModelHeights.Empty();
 	CDocument::DeleteContents();
 }
 

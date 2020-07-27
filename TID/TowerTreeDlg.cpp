@@ -11,8 +11,7 @@
 #include "TidCplus.h"
 #include "image.h"
 #include "XhCharString.h"
-#include "ArrayList.h"
-#include "SetActiveItemDlg.h"
+#include "SetActiveHeightLegsDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -333,59 +332,82 @@ HTREEITEM CTowerTreeDlg::GetNextHeightGroupItem(HTREEITEM hItem)
 
 bool CTowerTreeDlg::RefreshHeightGroupItem(HTREEITEM hHeightItem)
 {
+	CString ss_leg[4],sTemp;
 	CTowerTreeCtrl* pTreeCtrl=GetTreeCtrl();
 	TREEITEM_INFO* pItemInfo=(TREEITEM_INFO*)pTreeCtrl->GetItemData(hHeightItem);
 	if(pItemInfo==NULL||pItemInfo->itemType!=MODEL_CASE||pItemInfo->dwRefData==0)
 		return false;
-	//本体
 	ITidHeightGroup* pModule=(ITidHeightGroup*)pItemInfo->dwRefData;
-	CXhChar100 sBodyNo("本体号:%d",pModule->GetSerialId());
+	char strdata[64]={0};
+	CXhString xhstr(strdata,64);
+	/*
+#ifdef AFX_TARG_ENU_ENGLISH
+	xhstr.Printf("Anti-theft Bolt Z Scope:%.0f~%.0f",pModule->m_fBurglarLsStartZ,pModule->m_fBurglarLsEndZ);
+#else 
+	xhstr.Printf("防盗螺栓Z坐标范围:%.0f~%.0f",pModule->m_fBurglarLsStartZ,pModule->m_fBurglarLsEndZ);
+#endif
+	*/
 	HTREEITEM hSonItem=pTreeCtrl->GetChildItem(hHeightItem);
 	if(hSonItem==NULL)
-		hSonItem=pTreeCtrl->InsertItem(sBodyNo,PRJ_IMG_TOWERBODY,PRJ_IMG_TOWERBODY,hHeightItem);
+		hSonItem=pTreeCtrl->InsertItem(xhstr,PRJ_IMG_MAT_BOLT,PRJ_IMG_MAT_BOLT,hHeightItem);
 	else
-		pTreeCtrl->SetItemText(hSonItem,sBodyNo);
+		pTreeCtrl->SetItemText(hSonItem,xhstr);
+	pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_BURGLAR_LS_SCOPE,0));
+	pTreeCtrl->SetItemData(hSonItem,(DWORD)pItemInfo);
+#ifdef AFX_TARG_ENU_ENGLISH
+	xhstr.Printf("Body No:%d",pModule->GetBodyNo());
+#else 
+	xhstr.Printf("本体号:%d",pModule->GetSerialId());//GetBodyNo());
+#endif
+	hSonItem=pTreeCtrl->GetNextSiblingItem(hSonItem);
+	if(hSonItem==NULL)
+		hSonItem=pTreeCtrl->InsertItem(xhstr,PRJ_IMG_TOWERBODY,PRJ_IMG_TOWERBODY,hHeightItem);
+	else
+		pTreeCtrl->SetItemText(hSonItem,xhstr);
 	pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_BODY_LEGNO,0));
 	pTreeCtrl->SetItemData(hSonItem,(DWORD)pItemInfo);
-	//配腿
-	CString ss_leg[4],sTemp;
-	int nLeg=pModule->GetLegSerialArr(NULL);
-	ARRAY_LIST<int> legArr;
-	legArr.SetSize(nLeg);
-	pModule->GetLegSerialArr(legArr.m_pData);
-	for(int iQuad=0;iQuad<4;iQuad++)
+	//TODO:未完待改
+	/*int nMaxLegs=CFGLEG::MaxLegs();
+	for(int i=1;i<=192;i++)
 	{
-		for(int i=0;i<nLeg;i++)
+		for(int j=0;j<4;j++)
 		{
-			if(legArr[i]==theApp.m_uiActiveLegSerial[iQuad])
-				sTemp.Format("%d(*),",legArr[i]);
-			else
-				sTemp.Format("%d,",legArr[i]);
-			ss_leg[iQuad]+=sTemp;
+			if(pModule->m_dwLegCfgWord.IsHasNo(i))
+			{
+				if(i==pModule->m_arrActiveQuadLegNo[j])
+					sTemp.Format("%C(*),",(i-1)%nMaxLegs+'A');
+				else
+					sTemp.Format("%C,",(i-1)%nMaxLegs+'A');
+				ss_leg[j]+=sTemp;
+			}
 		}
 	}
-	for(int iQuad=0;iQuad<4;iQuad++)
+	for(int j=0;j<4;j++)
 	{
-		ss_leg[iQuad]=ss_leg[iQuad].Left(ss_leg[iQuad].GetLength()-1);	//去右侧的','
-		sTemp.Format("接腿(%d)配材号:",iQuad+1);
-		ss_leg[iQuad]=sTemp+ss_leg[iQuad];
+		ss_leg[j]=ss_leg[j].Left(ss_leg[j].GetLength()-1);	//去右侧的','
+#ifdef AFX_TARG_ENU_ENGLISH
+		sTemp.Format("Joint Leg(%d)Model Flag:",j+1);
+#else 
+		sTemp.Format("接腿(%d)配材号:",j+1);
+#endif
+		ss_leg[j]=sTemp+ss_leg[j];
 		hSonItem=pTreeCtrl->GetNextSiblingItem(hSonItem);
 		if(hSonItem==NULL)
-			hSonItem=pTreeCtrl->InsertItem(ss_leg[iQuad],PRJ_IMG_TOWERLEG,PRJ_IMG_TOWERLEG,hHeightItem);
+			hSonItem=pTreeCtrl->InsertItem(ss_leg[j],PRJ_IMG_TOWERLEG,PRJ_IMG_TOWERLEG,hHeightItem);
 		else
-			pTreeCtrl->SetItemText(hSonItem,ss_leg[iQuad]);
-		if(iQuad==0)
+			pTreeCtrl->SetItemText(hSonItem,xhstr);
+		if(j==0)
 			pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD1LEG_CFGNO,0));
-		else if(iQuad==1)
+		else if(j==1)
 			pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD2LEG_CFGNO,0));
-		else if(iQuad==2)
+		else if(j==2)
 			pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD3LEG_CFGNO,0));
-		else if(iQuad==3)
+		else if(j==3)
 			pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD4LEG_CFGNO,0));
 		else
 			pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(0,0));
 		pTreeCtrl->SetItemData(hSonItem,(DWORD)pItemInfo);
-	}
+	}*/
 	return true;
 }
 struct MODULE_HEIGHT{
@@ -396,32 +418,104 @@ struct MODULE_HEIGHT{
 };
 #include "SortFunc.h"
 #include "ArrayList.h"
-
+static int CompareModuleSerial(const MODULE_HEIGHT& height1,const MODULE_HEIGHT& height2)
+{
+	//if(height1.m_pModule->iNo>height2.m_pModule->iNo)
+	//	return  1;
+	//else if(height1.m_pModule->iNo<height2.m_pModule->iNo)
+	//	return -1;
+	//else
+		return 0;
+}
 void CTowerTreeDlg::RefreshModelItem(HTREEITEM hModelItem,ITidModel* pModel)
 {
+	CString ss;
+	CTreeCtrl *pTreeCtrl=GetTreeCtrl();
+	DeleteAllSubItems(pTreeCtrl,hModelItem);
+	HTREEITEM hParentItem,hItem;
+	HTREEITEM hSubItem=NULL,hArcLiftItem=NULL;
 	if(pModel==NULL)
 		pModel=gpTidModel;
 	if(pModel==NULL)
 		return;
-	CTreeCtrl *pTreeCtrl=GetTreeCtrl();
-	if(pTreeCtrl==NULL)
-		return;
-	DeleteAllSubItems(pTreeCtrl,hModelItem);
-	for(int i=0;i<pModel->HeightGroupCount();i++)
+	//TODO:未完待改
+	UINT hActModule=theApp.m_uiActiveHeightSerial;
+	ARRAY_LIST<MODULE_HEIGHT>heightsArr(0,pModel->HeightGroupCount());
+	ITidHeightGroup *pHeight;
+	int hI,i,j;
+	for(i=0;i<pModel->HeightGroupCount();i++)
+		heightsArr.append(MODULE_HEIGHT(pModel->GetHeightGroupAt(i)));
+	CBubbleSort<MODULE_HEIGHT>::BubSort(heightsArr.m_pData,heightsArr.GetSize(),CompareModuleSerial);
+	for(hI=0;hI<heightsArr.GetSize();hI++)
 	{
-		ITidHeightGroup *pHeightGroup=pModel->GetHeightGroupAt(i);
-		CXhChar100 sHeightName;
-		pHeightGroup->GetName(sHeightName,sHeightName.GetLengthMax());
-		HTREEITEM hParentItem=pTreeCtrl->InsertItem(sHeightName,PRJ_IMG_MODULECASE,PRJ_IMG_MODULECASE,hModelItem);
-		TREEITEM_INFO* pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_CASE,(DWORD)pHeightGroup));
+		HEIGHT_GROUP* pHeighGroup=theApp.hashModelHeights.Add(heightsArr[hI].m_pModule->GetSerialId());
+		pHeighGroup->m_pModule=pHeight=heightsArr[hI].m_pModule;
+		CXhChar100 heightname;
+		pHeight->GetName(heightname,heightname.GetLengthMax());
+		ss.Format("%s",(char*)heightname);
+		hParentItem =pTreeCtrl->InsertItem(ss,PRJ_IMG_MODULECASE,PRJ_IMG_MODULECASE,hModelItem);
+		//RefreshHeightGroupItem(hParentItem,&Ta);
+		TREEITEM_INFO* pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_CASE,(DWORD)pHeight));
 		pTreeCtrl->SetItemData(hParentItem,(DWORD)pItemInfo);
-		RefreshHeightGroupItem(hParentItem);
-		//
-		if(pHeightGroup->GetSerialId()==theApp.m_uiActiveHeightSerial)	//当前活动状态模型
+
+		CString ss_leg[4],sTemp;
+		ss.Format("本体号:%d",pHeight->GetSerialId());
+		hItem=pTreeCtrl->InsertItem(ss,PRJ_IMG_TOWERBODY,PRJ_IMG_TOWERBODY,hParentItem);
+		pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_BODY_LEGNO,0));
+		pTreeCtrl->SetItemData(hItem,(DWORD)pItemInfo);
+		BYTE xarrLegCfgBytes[24]={ 0 };
+		BYTE xarrConstBytes[8]={ 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80 };
+		pHeight->GetConfigBytes(xarrLegCfgBytes);
+		int niLegSerial=0;
+		memcpy(theApp.m_uiActiveLegSerial,pHeighGroup->m_uiActiveLegSerial,16);
+		for(i=1;i<=192;i++)
+		{
+			int niByteIndex=(i-1)/8;
+			int niBitIndex=(i-1)%8;
+			if(xarrLegCfgBytes[niByteIndex]&xarrConstBytes[niBitIndex])
+			{
+				for(j=0;j<4;j++)
+				{
+					if (niLegSerial==0&&pHeighGroup->m_uiActiveLegSerial[j]<(UINT)i)
+						pHeighGroup->m_uiActiveLegSerial[j]=(UINT)i;
+					if(i==theApp.m_uiActiveLegSerial[j])
+						sTemp.Format("%C(*),",niLegSerial+'A');
+					else
+						sTemp.Format("%C,",niLegSerial+'A');
+					ss_leg[j]+=sTemp;
+				}
+				niLegSerial++;
+			}
+		}
+		for(j=0;j<4;j++)
+		{
+			ss_leg[j]=ss_leg[j].Left(ss_leg[j].GetLength()-1);	//去右侧的','
+#ifdef AFX_TARG_ENU_ENGLISH
+			sTemp.Format("Joint Leg(%d)Model Flag:",j+1);
+#else 
+			sTemp.Format("接腿(%d)配材号:",j+1);
+#endif
+			ss_leg[j]=sTemp+ss_leg[j];
+			hItem=pTreeCtrl->InsertItem(ss_leg[j],PRJ_IMG_TOWERLEG,PRJ_IMG_TOWERLEG,hParentItem);
+			if(j==0)
+				pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD1LEG_CFGNO,0));
+			else if(j==1)
+				pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD2LEG_CFGNO,0));
+			else if(j==2)
+				pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD3LEG_CFGNO,0));
+			else if(j==3)
+				pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(MODEL_QUAD4LEG_CFGNO,0));
+			else
+				pItemInfo=InsertOrUpdateItemInfo(TREEITEM_INFO(0,0));
+			pTreeCtrl->SetItemData(hItem,(DWORD)pItemInfo);
+		}
+		if(pHeight->GetSerialId()==hActModule)	//当前活动状态模型
 		{
 			ShiftActiveItemState(hParentItem,ACTIVE_MODULE);
 			m_treeCtrl.Expand(hParentItem,TVE_EXPAND);
 		}
+
+		theApp.m_uiActiveHeightSerial=hActModule;
 		pTreeCtrl->Expand(hModelItem,TVE_EXPAND);
 	}
 }
@@ -537,92 +631,125 @@ void CTowerTreeDlg::OnSetActiveItem()
 	CTowerTreeCtrl* pTreeCtrl = GetTreeCtrl();
 	HTREEITEM hCurItem=pTreeCtrl->GetSelectedItem();
 	TREEITEM_INFO *pItemInfo=NULL;
-	pItemInfo=(TREEITEM_INFO*)pTreeCtrl->GetItemData(hCurItem);
+	if(hCurItem)
+		pItemInfo=(TREEITEM_INFO*)pTreeCtrl->GetItemData(hCurItem);
 	if(pItemInfo==NULL)
 		return;
-	HTREEITEM hHeightGroup;
+	//CTIDView *pLdsView=(CTIDView*)theApp.GetTIDDoc()->GetView(RUNTIME_CLASS(CTIDView));
+	//int nMaxLegs=CFGLEG::MaxLegs();
 	if(pItemInfo->itemType==MODEL_CASE)
-		hHeightGroup=hCurItem;
-	else
-		hHeightGroup=pTreeCtrl->GetParentItem(hCurItem);
-	TREEITEM_INFO *pModuleItemInfo=(TREEITEM_INFO*)pTreeCtrl->GetItemData(hHeightGroup);
-	ITidHeightGroup *pHeightGroup=NULL;
-	for(int i=0;i<gpTidModel->HeightGroupCount();i++)
 	{
-		pHeightGroup=gpTidModel->GetHeightGroupAt(i);
-		if(pModuleItemInfo&&pHeightGroup==(void*)pModuleItemInfo->dwRefData)
-			break;
+		ITidHeightGroup *pModule=NULL;
+		for(int i=0;i<gpTidModel->HeightGroupCount();i++)
+		{
+			pModule=gpTidModel->GetHeightGroupAt(i);
+			if(pModule==(void*)pItemInfo->dwRefData)
+				break;
+		}
+		if(pModule==NULL)
+			return;
+		theApp.m_uiActiveHeightSerial=pModule->GetSerialId();
+		HEIGHT_GROUP *pHeightGroup=theApp.hashModelHeights.GetValue(theApp.m_uiActiveHeightSerial);
+		if (pHeightGroup)
+			memcpy(theApp.m_uiActiveLegSerial,pHeightGroup->m_uiActiveLegSerial,16);
+		ShiftActiveItemState(hCurItem,ACTIVE_MODULE);
+		CTIDView *pTidView=theApp.GetTIDView();
+		ISolidDraw* pSolidDraw=pTidView->SolidDraw();
+		if(pSolidDraw)
+		{
+			pSolidDraw->BuildDisplayList(pTidView);
+			pSolidDraw->Draw();
+		}
 	}
-	if(pHeightGroup==NULL)
-		return;
-	if(pItemInfo->itemType==MODEL_QUAD1LEG_CFGNO||pItemInfo->itemType==MODEL_QUAD2LEG_CFGNO||
+	else if( pItemInfo->itemType==MODEL_QUAD1LEG_CFGNO||pItemInfo->itemType==MODEL_QUAD2LEG_CFGNO||
 		pItemInfo->itemType==MODEL_QUAD3LEG_CFGNO||pItemInfo->itemType==MODEL_QUAD4LEG_CFGNO)
 	{
-		int nLeg=pHeightGroup->GetLegSerialArr(NULL);
-		ARRAY_LIST<int> legArr;
-		legArr.SetSize(nLeg);
-		pHeightGroup->GetLegSerialArr(legArr.m_pData);
-		CSetActiveItemDlg dlg;
-		for(int i=0;i<nLeg;i++)
-			dlg.m_arrStrList.Add(CXhChar16("%d",legArr[i]));
-		if(pItemInfo->itemType==MODEL_QUAD1LEG_CFGNO)
-			dlg.m_sActiveItem.Format("%d",theApp.m_uiActiveLegSerial[0]);
-		else if(pItemInfo->itemType==MODEL_QUAD2LEG_CFGNO)
-			dlg.m_sActiveItem.Format("%d",theApp.m_uiActiveLegSerial[1]);
-		else if(pItemInfo->itemType==MODEL_QUAD3LEG_CFGNO)
-			dlg.m_sActiveItem.Format("%d",theApp.m_uiActiveLegSerial[2]);
-		else if(pItemInfo->itemType==MODEL_QUAD4LEG_CFGNO)
-			dlg.m_sActiveItem.Format("%d",theApp.m_uiActiveLegSerial[3]);
-		if(dlg.DoModal()!=IDOK)
+		CSetActiveHeightLegsDlg dlg;
+		HTREEITEM hParentItem=pTreeCtrl->GetParentItem(hCurItem);
+		HTREEITEM xarrQuadLegItems[4]={ NULL };
+		HTREEITEM hLegItem=pTreeCtrl->GetChildItem(hParentItem);
+		while (hLegItem!=NULL)
+		{
+			TREEITEM_INFO *pItem=(TREEITEM_INFO*)pTreeCtrl->GetItemData(hLegItem);
+			CString ss=pTreeCtrl->GetItemText(hLegItem);
+			if (pItem->itemType==MODEL_QUAD1LEG_CFGNO)
+				xarrQuadLegItems[0]=hLegItem;
+			else if(pItem->itemType==MODEL_QUAD2LEG_CFGNO)
+				xarrQuadLegItems[1]=hLegItem;
+			else if(pItem->itemType==MODEL_QUAD3LEG_CFGNO)
+				xarrQuadLegItems[2]=hLegItem;
+			else if(pItem->itemType==MODEL_QUAD4LEG_CFGNO)
+				xarrQuadLegItems[3]=hLegItem;
+			hLegItem=pTreeCtrl->GetNextSiblingItem(hLegItem);
+		}
+
+		TREEITEM_INFO *pItem=(TREEITEM_INFO*)pTreeCtrl->GetItemData(hParentItem);
+		HEIGHT_GROUP* pHeighGroup;
+		for(pHeighGroup=theApp.hashModelHeights.GetFirst();pHeighGroup;pHeighGroup=theApp.hashModelHeights.GetNext())
+		{
+			if(pItem&&pHeighGroup->m_pModule==(ITidHeightGroup*)pItem->dwRefData)
+				break;
+		}
+		if(pHeighGroup==NULL)
 			return;
-		CString ss,sTemp;
-		int iQuad=0;
-		if(pItemInfo->itemType==MODEL_QUAD1LEG_CFGNO)
+		dlg.m_idBodyHeight=pHeighGroup->m_pModule->GetSerialId();
+		for (int i=0;i<4;i++)
+			dlg.xarrActiveLegSerials[i]=(BYTE)pHeighGroup->m_uiActiveLegSerial[i];
+		if (dlg.DoModal()==IDOK)
 		{
-			theApp.m_uiActiveLegSerial[0]=atoi(dlg.m_sActiveItem);
-			ss="接腿(1)配材号:";
-			iQuad=0;
+			theApp.m_uiActiveHeightSerial=dlg.m_idBodyHeight;
+			//刷新树控件
+			BYTE xarrLegCfgBytes[24]={ 0 };
+			BYTE xarrConstBytes[8]={ 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80 };
+			pHeighGroup->m_pModule->GetConfigBytes(xarrLegCfgBytes);
+			int i,j,niLegSerial=0;
+			CString ss_leg[4],sTemp;
+			for (i=0;i<4;i++)
+				theApp.m_uiActiveLegSerial[i]=pHeighGroup->m_uiActiveLegSerial[i]=dlg.xarrActiveLegSerials[i];
+			for(i=1;i<=192;i++)
+			{
+				int niByteIndex=(i-1)/8;
+				int niBitIndex=(i-1)%8;
+				if(xarrLegCfgBytes[niByteIndex]&xarrConstBytes[niBitIndex])
+				{
+					for(j=0;j<4;j++)
+					{
+						if(i==theApp.m_uiActiveLegSerial[j])
+							sTemp.Format("%C(*),",niLegSerial+'A');
+						else
+							sTemp.Format("%C,",niLegSerial+'A');
+						ss_leg[j]+=sTemp;
+					}
+					niLegSerial++;
+				}
+			}
+			for(j=0;j<4;j++)
+			{
+				ss_leg[j]=ss_leg[j].Left(ss_leg[j].GetLength()-1);	//去右侧的','
+	#ifdef AFX_TARG_ENU_ENGLISH
+				sTemp.Format("Joint Leg(%d)Model Flag:",j+1);
+	#else 
+				sTemp.Format("接腿(%d)配材号:",j+1);
+	#endif
+				ss_leg[j]=sTemp+ss_leg[j];
+				if(xarrQuadLegItems[j]!=NULL)
+					pTreeCtrl->SetItemText(xarrQuadLegItems[j],ss_leg[j]);
+			}
+			//if(pHeight->GetSerialId()==hActModule)	//当前活动状态模型
+			//{
+			//	ShiftActiveItemState(hParentItem,ACTIVE_MODULE);
+			//	m_treeCtrl.Expand(hParentItem,TVE_EXPAND);
+			//}
+
+			//
+			CTIDView *pTidView=theApp.GetTIDView();
+			ISolidDraw* pSolidDraw=pTidView->SolidDraw();
+			if(pSolidDraw)
+			{
+				pSolidDraw->BuildDisplayList(pTidView);
+				pSolidDraw->Draw();
+			}
 		}
-		else if(pItemInfo->itemType==MODEL_QUAD2LEG_CFGNO)
-		{
-			theApp.m_uiActiveLegSerial[1]=atoi(dlg.m_sActiveItem);
-			ss="接腿(2)配材号:";
-			iQuad=1;
-		}
-		else if(pItemInfo->itemType==MODEL_QUAD3LEG_CFGNO)
-		{	
-			theApp.m_uiActiveLegSerial[2]=atoi(dlg.m_sActiveItem);
-			ss="接腿(3)配材号:";
-			iQuad=2;
-		}
-		else if(pItemInfo->itemType==MODEL_QUAD4LEG_CFGNO)
-		{	
-			theApp.m_uiActiveLegSerial[3]=atoi(dlg.m_sActiveItem);
-			ss="接腿(4)配材号:";
-			iQuad=3;
-		}
-		for(int i=0;i<nLeg;i++)
-		{
-			if(legArr[i]==theApp.m_uiActiveLegSerial[iQuad])
-				sTemp.Format("%d(*),",legArr[i]);
-			else
-				sTemp.Format("%d,",legArr[i]);
-			ss+=sTemp;
-		}
-		ss=ss.Left(ss.GetLength()-1);
-		pTreeCtrl->SetItemText(hCurItem,ss);
-	}
-	else if(pItemInfo->itemType==MODEL_CASE)
-		theApp.m_uiActiveHeightSerial=pHeightGroup->GetSerialId();
-	if(hHeightGroup)
-		ShiftActiveItemState(hHeightGroup,ACTIVE_MODULE);	//加粗呼高项
-	//
-	CTIDView *pTidView=theApp.GetTIDView();
-	ISolidDraw* pSolidDraw=pTidView->SolidDraw();
-	if(pSolidDraw)
-	{
-		pSolidDraw->BuildDisplayList(pTidView);
-		pSolidDraw->Draw();
 	}
 }
 

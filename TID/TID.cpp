@@ -90,7 +90,7 @@ BOOL CTIDApp::InitInstance()
 	// TODO: 应适当修改该字符串，
 	// 例如修改为公司或组织名
 	//进行加密处理
-	DWORD version[2]={0,20170615};
+	/*DWORD version[2]={0,20170615};
 	BYTE* pByteVer=(BYTE*)version;
 	pByteVer[0]=1;
 	pByteVer[1]=2;
@@ -126,7 +126,7 @@ BOOL CTIDApp::InitInstance()
 		else if(retCode==10)
 			AfxMessageBox("10#程序缺少相应执行权限，请以管理员权限运行程序");
 		exit(0);
-	}
+	}*/
 	SetRegistryKey(_T("Xerofox"));
 	LoadStdProfileSettings(4); 
 	//判断TID是否以子进程方式进行工作
@@ -202,7 +202,16 @@ CTIDView* CTIDApp::GetTIDView()
 	CTIDView *pView = (CTIDView*)pDoc->GetView(RUNTIME_CLASS(CTIDView));
 	return pView;
 }
-
+bool TestBitState(BYTE xarrLegCfgBytes[24],int niBitSerial)
+{
+	BYTE xarrConstBytes[8]={ 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80 };
+	int niByteIndex=(niBitSerial-1)/8;
+	int niBitIndex=(niBitSerial-1)%8;
+	if (xarrLegCfgBytes[niByteIndex]&xarrConstBytes[niBitIndex])
+		return true;
+	else
+		return false;
+}
 void* CTIDApp::GetActiveTowerInstance()
 {
 	if(m_ciFileType==0)
@@ -212,7 +221,21 @@ void* CTIDApp::GetActiveTowerInstance()
 		ITidHeightGroup* pHeightGroup=gpTidModel->GetHeightGroupAt(m_uiActiveHeightSerial-1);
 		if(pHeightGroup==NULL)
 			return NULL;
-		pTowerInstance=pHeightGroup->GetTowerInstance(m_uiActiveLegSerial[0],m_uiActiveLegSerial[1],m_uiActiveLegSerial[2],m_uiActiveLegSerial[3]);
+		BYTE xarrLegCfgBytes[24]={ 0 };
+		BYTE xarrLegQuadSerialInHeight[4]={ 1 };
+		pHeightGroup->GetConfigBytes(xarrLegCfgBytes);
+		int i,liCurrLegSerialInHeight=0;
+		for (i=1;i<=192;i++)
+		{
+			if (TestBitState(xarrLegCfgBytes,i))
+				liCurrLegSerialInHeight++;
+			for (int j=0;j<4;j++)
+			{
+				if (i==m_uiActiveLegSerial[j])
+					xarrLegQuadSerialInHeight[j]=liCurrLegSerialInHeight;
+			}
+		}
+		pTowerInstance=pHeightGroup->GetTowerInstance(xarrLegQuadSerialInHeight[0],xarrLegQuadSerialInHeight[1],xarrLegQuadSerialInHeight[2],xarrLegQuadSerialInHeight[3]);
 #endif
 		return pTowerInstance;
 	}
@@ -222,7 +245,21 @@ void* CTIDApp::GetActiveTowerInstance()
 		if(pHeightGroup==NULL)
 			return NULL;
 		IModTowerInstance* pInstance=NULL;
-		pInstance=pHeightGroup->GetTowerInstance(m_uiActiveLegSerial[0],m_uiActiveLegSerial[1],m_uiActiveLegSerial[2],m_uiActiveLegSerial[3]);
+		BYTE xarrLegCfgBytes[24]={ 0 };
+		BYTE xarrLegQuadSerialInHeight[4]={ 1 };
+		/*pHeightGroup->GetConfigBytes(xarrLegCfgBytes);
+		int i,liCurrLegSerialInHeight=0;
+		for (i=1;i<=192;i++)
+		{
+			if (TestBitState(xarrLegCfgBytes,i))
+				liCurrLegSerialInHeight++;
+			for (int j=0;j<4;j++)
+			{
+				if (i==m_uiActiveLegSerial[j])
+					xarrLegQuadSerialInHeight[j]=liCurrLegSerialInHeight;
+			}
+		}*/
+		pInstance=pHeightGroup->GetTowerInstance(xarrLegQuadSerialInHeight[0],xarrLegQuadSerialInHeight[1],xarrLegQuadSerialInHeight[2],xarrLegQuadSerialInHeight[3]);
 		return pInstance;
 	}
 	return NULL;

@@ -54,16 +54,10 @@
     <ClCompile Include="AssemblePart.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="SetActiveItemDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ToolKits\TowerCad\SegI.cpp">
       <Filter>TowerCad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ToolKits\TowerCad\ParseAdaptNo.cpp">
-      <Filter>TowerCad</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ToolKits\TowerCad\TIDBuffer.cpp">
       <Filter>TowerCad</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ToolKits\ToolCode\Buffer.cpp">
@@ -100,6 +94,9 @@
       <Filter>ToolCode</Filter>
     </ClCompile>
     <ClCompile Include="btc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SetActiveHeightLegsDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,9 +152,6 @@
     <ClInclude Include="AssemblePart.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SetActiveItemDlg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ldsptr_list.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -165,9 +159,6 @@
       <Filter>TowerCad</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ToolKits\TowerCad\ParseAdaptNo.h">
-      <Filter>TowerCad</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ToolKits\TowerCad\TIDBuffer.h">
       <Filter>TowerCad</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ToolKits\ToolCode\Buffer.h">
@@ -201,6 +192,9 @@
       <Filter>ToolCode</Filter>
     </ClInclude>
     <ClInclude Include="btc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SetActiveHeightLegsDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

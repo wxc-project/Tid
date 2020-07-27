@@ -29,6 +29,53 @@ CString MakeMaterialMarkSetString()
 	CString matStr="Q235|Q345|Q390|Q420|";
 	return matStr;
 }
+//////////////////////////////////////////////////////
+//原定义于XhLicAgent或XhLdsLm中的函数
+static bool SimplifiedNumString(char *num_str)
+{
+	if(num_str==NULL)
+		return false;
+	int str_len = (int)strlen(num_str);
+	char *point = NULL;
+	for(int i=str_len-1;i>=0;i--)
+	{
+		if(num_str[i]=='.')
+		{
+			point=&num_str[i];
+			break;
+		}
+	}
+	if(point==NULL)
+		return true;
+	char* cursor=&num_str[str_len-1];
+	while(cursor>=point)
+	{
+		if(*cursor=='0'||*cursor=='.')
+		{
+			*cursor='\0';
+			cursor--;
+		}
+		else
+			break;
+	}
+	if(*num_str=='-'&&*(num_str+1)=='0'&&*(num_str+2)==0)
+	{
+		*num_str='0';
+		*(num_str+1)=0;
+	}
+	return true;
+}
+static DWORD GetSingleWord(long iNo)
+{
+	DWORD CFG_NO[32]={0X00000001,0X00000002,0X00000004,0X00000008,0X00000010,0X00000020,0X00000040,0X00000080,
+					  0X00000100,0X00000200,0X00000400,0X00000800,0X00001000,0X00002000,0X00004000,0X00008000,
+					  0X00010000,0X00020000,0X00040000,0X00080000,0X00100000,0X00200000,0X00400000,0X00800000,
+					  0X01000000,0X02000000,0X04000000,0X08000000,0X10000000,0X20000000,0X40000000,0X80000000};
+	if(iNo>0&&iNo<=32)
+		return CFG_NO[(BYTE)iNo-1];//CFG_NO[iNo-1];
+	else
+		return 0;
+}
 BOOL CTIDView::DisplayPartProperty(ITidAssemblePart *pAssmblePart)
 {
 	CTowerPropertyDlg *pPropDlg=((CMainFrame*)AfxGetMainWnd())->GetTowerPropertyPage();

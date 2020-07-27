@@ -8,11 +8,49 @@
 #include "resource.h"       // 主符号
 #include "TIDView.h"
 #include "ModCore.h"
-// CTIDApp:
+#include "HashTable.h"// CTIDApp:
 // 有关此类的实现，请参阅 TID.cpp
 //
 
 class CTIDDoc; 
+class CMaxDouble{
+	bool inited;
+public:
+	double number;
+	void* m_pRelaObj;
+	CMaxDouble(){inited=false;m_pRelaObj=NULL;}
+	CMaxDouble(double init_val,void* pRelaObj=NULL){inited=true;number=init_val;m_pRelaObj=pRelaObj;}
+	operator double(){return number;}
+	bool IsInited() const{return inited;}
+	double Update(double val,void* pRelaObj=NULL,double tolerance=0)
+	{
+		if(!inited)
+		{
+			number=val;
+			inited=true;
+			m_pRelaObj=pRelaObj;
+		}
+		else if(number<val-tolerance)
+		{
+			number=val;
+			m_pRelaObj=pRelaObj;
+		}
+		return number;
+	}
+};
+struct HEIGHT_GROUP {
+	ITidHeightGroup* m_pModule;
+	UINT m_uiActiveHeightSerial;
+	UINT m_uiActiveLegSerial[4];
+	CMaxDouble lowestZ;
+	HEIGHT_GROUP(){
+		m_pModule=NULL;
+		m_uiActiveHeightSerial=1;
+		m_uiActiveLegSerial[0]= m_uiActiveLegSerial[1]= m_uiActiveLegSerial[2]= m_uiActiveLegSerial[3]= 1;
+	}
+	void SetKey(DWORD key) { m_uiActiveHeightSerial=key; }
+};
+
 class CTIDApp : public CWinAppEx
 {
 public:
@@ -20,6 +58,7 @@ public:
 	BOOL m_bChildProcess;	//子进程模式
 	UINT m_uiActiveHeightSerial;
 	UINT m_uiActiveLegSerial[4];
+	CHashListEx<HEIGHT_GROUP> hashModelHeights;
 public:
 	CTIDApp();
 // 重写
@@ -33,6 +72,8 @@ public:
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 };
+
+bool TestBitState(BYTE xarrLegCfgBytes[24],int niBitSerial);
 
 extern CTIDApp theApp;
 extern IModModel* gpModModel;

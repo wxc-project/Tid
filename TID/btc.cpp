@@ -81,8 +81,7 @@ bool btc::SKETCH_PLANE::CreateStdPlane(const double* origin,const double* normve
 	_pVertexArr = new GEPOINT[_nVertexCount];
 	GECS cs;
 	cs.axis_z=GEPOINT(normal);
-	if(!Standarized(cs.axis_z))
-		return false;
+	cs.axis_z.normalized();
 	if(edgevec)
 	{
 		cs.axis_x=edgevec;

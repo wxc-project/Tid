@@ -46,8 +46,8 @@
 #include <afxdockablepane.h>
 #include <afx.h>
 
-#include "XhLicAgent.h"
-#include "XhLdsLm.h"
+//#include "XhLicAgent.h"
+//#include "XhLdsLm.h"
 
 #pragma warning(disable:4996)		// VC++ 2005 deprecated function warnings
 
