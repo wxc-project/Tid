@@ -561,6 +561,12 @@ void DrawSolidTower(void* pContext)
 	pView->SolidDraw()->NewWorkPlaneSketch(3, clr, sketch3.pVertexArr, sketch3.VertexCount, sketch3.normal, "接身高");
 	sketch4.CreateStdPlane(GEPOINT(-10000, 0, fTransZ), GEPOINT(0, 0, -1), GEPOINT(1, 0, 0), 20000);
 	pView->SolidDraw()->NewWorkPlaneSketch(4, clr, sketch4.pVertexArr, sketch4.VertexCount, sketch4.normal,CXhChar16("%g", fTransZ - fZeroZ));
+	//腿高
+	btc::SKETCH_PLANE sketch5, sketch6;
+	sketch5.CreateStdPlane(GEPOINT(0, 0, fTransZ), GEPOINT(0, 0, 1), GEPOINT(1, 0, 0), 20000);
+	pView->SolidDraw()->NewWorkPlaneSketch(5, clr, sketch5.pVertexArr, sketch5.VertexCount, sketch5.normal, "腿长");
+	sketch6.CreateStdPlane(GEPOINT(0, 0, fHeight), GEPOINT(0, 0, -1), GEPOINT(1, 0, 0), 20000);
+	pView->SolidDraw()->NewWorkPlaneSketch(6, clr, sketch6.pVertexArr, sketch6.VertexCount, sketch6.normal, CXhChar16("%g", fHeight - fTransZ));
 #endif
 	//绘制挂点信息
 	for (DWORD i = 0; i < gpTidModel->HangPointCount(); i++)

@@ -625,6 +625,7 @@ bool CTidModel::ExportModFile(const char* sFileName)
 		pHeightGroup->SetLegCfg(pModule->module.m_dwLegCfgWord.flag.bytes);
 		pHeightGroup->SetNameHeight(pModule->GetNamedHeight());
 	}
+	pModModel->SetNamedHeightZeroZ(GetNamedHeightZeroZ());
 	pModModel->SetTowerHeight(fTowerHeight);
 	GECS ucs = TransToUcs(pModModel->BuildUcsByModCS());
 	//提取节点信息
@@ -845,20 +846,16 @@ int CTidHeightGroup::GetLegSerialArr(int* legSerialArr)
 }
 BYTE CTidHeightGroup::GetLegBitSerialFromSerialId(int serial)
 {
-	int legBitSerial=0;
-	for(int i=1;i<=192;i++)
+	int legBitSerial = 0;
+	for (int i = 1; i <= 192; i++)
 	{
-		if(module.m_dwLegCfgWord.IsHasNo(i))
-		{
-			if(legBitSerial==0)
-				legBitSerial=1;
-		}
-		if(legBitSerial==serial)
+		if (!module.m_dwLegCfgWord.IsHasNo(i))
+			continue;
+		legBitSerial += 1;
+		if (legBitSerial == serial)
 			return i;
-		if(legBitSerial>0)
-			legBitSerial++;
-		if(legBitSerial>24)
-			break;	//一组呼高最多允许有24组接腿
+		if (legBitSerial >= 24)
+			break; //一组呼高最多允许有24组接腿
 	}
 	return 0;
 }
@@ -909,6 +906,19 @@ double CTidHeightGroup::GetLegHeightDifference(int legSerial)
 	}
 	return (init_level+1-legSerial)*level_height*0.1;
 }
+double CTidHeightGroup::GetLegHeight(int legSerial)
+{
+	//计算最长腿长
+	double fBody2LegTransZ = GetBody2LegTransitZ();
+	double fLowestLegZ = GetLowestZ();
+	double fMaxLegH = fLowestLegZ - fBody2LegTransZ;
+	//计算指定编号的腿与最长腿的高度差
+	double fLegDiffH = GetLegHeightDifference(legSerial);
+	fLegDiffH *= 1000;
+	//
+	double fLegH = (fLegDiffH < 0) ? fMaxLegH + fLegDiffH : fMaxLegH - fLegDiffH;
+	return fLegH * 0.001;
+}
 ITidTowerInstance* CTidHeightGroup::GetTowerInstance(int legSerialQuad1, int legSerialQuad2, int legSerialQuad3, int legSerialQuad4)
 {
 	union UNIQUEID{
@@ -928,9 +938,16 @@ ITidTowerInstance* CTidHeightGroup::GetTowerInstance(int legSerialQuad1, int leg
 double CTidHeightGroup::GetLowestZ()
 {
 	double fMaxNodeZ = 0;
-	ITidNode* pTidNode = NULL;
-	for (pTidNode = m_pModel->EnumTidNodeFirst(m_id); pTidNode; pTidNode = m_pModel->EnumTidNodeNext(m_id))
-		fMaxNodeZ = max(fMaxNodeZ, pTidNode->GetPos().z);
+	ITidAssemblePart* pPart = NULL;
+	for (pPart = m_pModel->EnumAssemblePartFirst(m_id); pPart; pPart = m_pModel->EnumAssemblePartNext(m_id))
+	{
+		if (!pPart->IsHasBriefRodLine())
+			continue;
+		if (pPart->GetLegQuad() < 1 || pPart->GetLegQuad() > 4)
+			continue;	//非腿部杆件
+		fMaxNodeZ = max(fMaxNodeZ, pPart->BriefLineStart().z);
+		fMaxNodeZ = max(fMaxNodeZ, pPart->BriefLineEnd().z);
+	}
 	return fMaxNodeZ;
 }
 double CTidHeightGroup::GetBody2LegTransitZ()
@@ -989,7 +1006,7 @@ void CTidTowerInstance::InitAssemblePartAndBolt()
 {
 	if(Nodes.GetNodeNum()==0)
 	{
-		double fMaxNodeZ=0;
+		
 		NODE_ASSEMBLY node;
 		UINT uCount=m_pModel->m_xNodeSection.NodeCount();
 		for(UINT i=0;i<uCount;i++)
@@ -1000,8 +1017,6 @@ void CTidTowerInstance::InitAssemblePartAndBolt()
 			CTidNode* pNode=Nodes.Add(i+1);
 			pNode->node=node;
 			pNode->SetBelongModel(m_pModel);
-			if(fMaxNodeZ<node.xPosition.z)
-				fMaxNodeZ=node.xPosition.z;
 		}
 		uCount=m_pModel->m_xNodeSection.NodeCount(false);
 		for(UINT i=0;i<uCount;i++)
@@ -1028,11 +1043,11 @@ void CTidTowerInstance::InitAssemblePartAndBolt()
 				pNode->SetBelongModel(m_pModel);
 			}
 		}
-		m_fInstanceHeight=fMaxNodeZ;
 	}
 	int iKey=0;
 	if(partAssembly.GetNodeNum()==0)
 	{	//需要提取构件装配集合
+		double fMaxNodeZ = 0;
 		UINT uCount=m_pModel->m_xAssemblyParts.AssemblyCount();
 		for(UINT i=0;i<uCount;i++)
 		{
@@ -1047,7 +1062,13 @@ void CTidTowerInstance::InitAssemblePartAndBolt()
 			pAssmPart->solid.CopySolidBuffer(partinfo.solid.BufferPtr(),partinfo.solid.BufferLength());
 			TID_CS acs=pAssmPart->GetAcs();
 			pAssmPart->solid.TransToACS(acs);
+			if (pAssmPart->IsHasBriefRodLine())
+			{
+				fMaxNodeZ = max(fMaxNodeZ, pAssmPart->BriefLineStart().z);
+				fMaxNodeZ = max(fMaxNodeZ, pAssmPart->BriefLineEnd().z);
+			}
 		}
+		m_fInstanceHeight = fMaxNodeZ;
 		uCount=m_pModel->m_xAssemblyParts.AssemblyCount(false);
 		for(UINT i=0;i<uCount;i++)
 		{

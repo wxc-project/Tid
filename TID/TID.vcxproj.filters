@@ -69,9 +69,6 @@
     <ClCompile Include="..\..\ToolKits\ToolCode\ColorSelectComboBox.cpp">
       <Filter>ToolCode</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ToolKits\ToolCode\CreateFace.cpp">
-      <Filter>ToolCode</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ToolKits\ToolCode\DialogPanel.cpp">
       <Filter>ToolCode</Filter>
     </ClCompile>
@@ -98,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="SetActiveHeightLegsDlg.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ToolKits\ToolCode\CreateFace.cpp">
+      <Filter>ToolCode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +167,6 @@
     <ClInclude Include="..\..\ToolKits\ToolCode\ColorSelectComboBox.h">
       <Filter>ToolCode</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ToolKits\ToolCode\CreateFace.h">
-      <Filter>ToolCode</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ToolKits\ToolCode\DialogPanel.h">
       <Filter>ToolCode</Filter>
     </ClInclude>
@@ -196,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="SetActiveHeightLegsDlg.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ToolKits\ToolCode\CreateFace.h">
+      <Filter>ToolCode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

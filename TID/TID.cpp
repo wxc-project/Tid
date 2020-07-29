@@ -301,7 +301,7 @@ void Test1();
 void Test2();
 void CTIDApp::OnAppAbout()
 {
-	return Test2();
+	return Test1();
 	//
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
@@ -311,17 +311,21 @@ void CTIDApp::OnAppAbout()
 void Test1()
 {
 	CLogErrorLife logErrLife;
-	ITidHeightGroup* pHeightGroup=gpTidModel->GetHeightGroupAt(1);
+	ITidHeightGroup* pHeightGroup=gpTidModel->GetHeightGroupAt(2);
 	if(pHeightGroup==NULL)
 		return;
+	CXhChar50 sName;
+	pHeightGroup->GetName(sName);
 	int nn=pHeightGroup->GetLegSerialArr(NULL);
 	ARRAY_LIST<int> xLegSerialArr;
 	xLegSerialArr.SetSize(nn);
 	pHeightGroup->GetLegSerialArr(xLegSerialArr.m_pData);
+	logerr.Log("呼高(%s)接腿信息", (char*)sName);
 	for(int i=0;i<nn;i++)
 	{
 		double fDiffDist=pHeightGroup->GetLegHeightDifference(xLegSerialArr[i]);
-		logerr.Log("接腿序号:%d\t减退米数:%f",xLegSerialArr[i],fDiffDist);
+		double fLegHeigh = pHeightGroup->GetLegHeight(xLegSerialArr[i]);
+		logerr.Log("接腿序号:%d\t减退米数:%f\t腿长:%f", xLegSerialArr[i], fDiffDist, fLegHeigh);
 		//
 		int iLegSerial=pHeightGroup->GetLegSerial(fDiffDist);
 		logerr.Log("减退米数:%f\t接腿序号:%d",fDiffDist,iLegSerial);

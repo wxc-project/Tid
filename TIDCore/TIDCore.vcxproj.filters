@@ -48,9 +48,6 @@
     <ClInclude Include="TidCplus.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TidToolFunc.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ToolKits\TowerCad\TIDBuffer.h">
       <Filter>TowerCad</Filter>
     </ClInclude>
@@ -74,6 +71,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ToolKits\ToolCode\XhCharString.h">
       <Filter>ToolCode</Filter>
+    </ClInclude>
+    <ClInclude Include="TidToolFunc.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,10 +116,10 @@
     <ClCompile Include="..\..\ToolKits\ToolCode\XhCharString.cpp">
       <Filter>ToolCode</Filter>
     </ClCompile>
-    <ClCompile Include="TidToolFunc.cpp">
+    <ClCompile Include="TidCplus.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TidCplus.cpp">
+    <ClCompile Include="TidToolFunc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

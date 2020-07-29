@@ -464,6 +464,7 @@ public:
 	virtual int GetLegSerialArr(int* legSerialArr);
 	virtual int GetLegSerial(double heightDifference);
 	virtual double GetLegHeightDifference(int legSerial);
+	virtual double GetLegHeight(int legSerial);
 	virtual UINT GetNamedHeight(){return module.m_uiNamedHeight;}
 	virtual ITidTowerInstance* GetTowerInstance(int legSerialQuad1, int legSerialQuad2, int legSerialQuad3, int legSerialQuad4);
 	virtual double GetLowestZ();

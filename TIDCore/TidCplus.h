@@ -333,6 +333,8 @@ struct TIDCORE_API ITidHeightGroup {
 	virtual int GetLegSerial(double heightDifference) = 0;
 	//legSerial，平腿为0，各减腿依次+1,返回值为指定等级减腿与平推间的高度差(一般为负值,单位m)
 	virtual double GetLegHeightDifference(int legSerial) = 0;	//
+	//获取指定腿的高度（指定接腿Z值-接身高）,单位m
+	virtual double GetLegHeight(int legSerial) = 0;	//
 	//呼高高度(最长腿Z值-呼高基点Z值)
 	virtual UINT GetNamedHeight() = 0;	//单位,mm(V1.4新增特性)
 	//获取呼高的最大高度(按最长腿计算)
