@@ -299,9 +299,10 @@ END_MESSAGE_MAP()
 #include "ArrayList.h"
 void Test1();
 void Test2();
+void Test3();
 void CTIDApp::OnAppAbout()
 {
-	return Test1();
+	return Test3();
 	//
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
@@ -346,6 +347,20 @@ void Test2()
 		logerr.Log("挂点：%c\t名称：%s",cType,sName);
 	}
 	if(logerr.IsHasContents())
+		logerr.ShowToScreen();
+}
+//测试基础根开
+void Test3()
+{
+	int iBodySerial = 1;
+	int nSubLeg = gpTidModel->GetSubLegCount(1);
+	logerr.Log("呼高1的子腿数为：%d",nSubLeg);
+	for (int i = 0; i < nSubLeg; i++)
+	{
+		double fWidth = gpTidModel->GetSubLegBaseWidth(iBodySerial, i+1);
+		logerr.Log("%d号子腿根开：%g",i+1, fWidth);
+	}
+	if (logerr.IsHasContents())
 		logerr.ShowToScreen();
 }
 // CTIDApp 消息处理程序

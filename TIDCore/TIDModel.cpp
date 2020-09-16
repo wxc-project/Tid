@@ -417,7 +417,7 @@ double CTidModel::GetSubLegBaseWidth(BYTE ciBodySerial, BYTE ciLegSerial)
 {
 	GEPOINT pos = m_xFoundationSection.GetSubLegFoundationOrgBySerial(ciBodySerial, ciLegSerial);
 	double fHalfFrontBaseWidth = pos.x;
-	return fHalfFrontBaseWidth * 2;
+	return fabs(fHalfFrontBaseWidth * 2);
 }
 ISteelMaterialLibrary* CTidModel::GetSteelMatLib()
 {

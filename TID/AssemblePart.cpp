@@ -31,7 +31,7 @@ CAssemblePart::CAssemblePart(ITidAssemblePart *pAssemblePart)
 //³õÊ¼»¯ÊôÐÔid
 const int HASHTABLESIZE=500;
 const int STATUSHASHTABLESIZE=500;
-void CAssemblePart::InitPropHashtable()
+int CAssemblePart::InitPropHashtable()
 {
 	int id=1;
 	propHashtable.SetHashTableGrowSize(HASHTABLESIZE);
@@ -64,6 +64,7 @@ void CAssemblePart::InitPropHashtable()
 	AddPropItem("acs.axisZ.x",PROPLIST_ITEM(id++,"X"));
 	AddPropItem("acs.axisZ.y",PROPLIST_ITEM(id++,"Y"));
 	AddPropItem("acs.axisZ.z",PROPLIST_ITEM(id++,"Z"));
+	return id;
 }
 int CAssemblePart::GetPropValueStr(long id, char *valueStr,UINT nMaxStrBufLen/*=100*/)
 {
@@ -181,7 +182,7 @@ CAssembleBolt::CAssembleBolt(ITidAssembleBolt *pAssembleBolt)
 	m_pAssembleBolt=pAssembleBolt;
 	m_pTidBolt=pAssembleBolt->GetTidBolt();
 }
-void CAssembleBolt::InitPropHashtable()
+int CAssembleBolt::InitPropHashtable()
 {
 	int id=1;
 	propHashtable.SetHashTableGrowSize(HASHTABLESIZE);
@@ -208,6 +209,7 @@ void CAssembleBolt::InitPropHashtable()
 	AddPropItem("acs.axisZ.x",PROPLIST_ITEM(id++,"X"));
 	AddPropItem("acs.axisZ.y",PROPLIST_ITEM(id++,"Y"));
 	AddPropItem("acs.axisZ.z",PROPLIST_ITEM(id++,"Z"));
+	return id;
 }
 int CAssembleBolt::GetPropValueStr(long id, char *valueStr,UINT nMaxStrBufLen/*=100*/)
 {
@@ -305,7 +307,7 @@ CAssembleAnchorBolt::CAssembleAnchorBolt(ITidAssembleAnchorBolt *pAssembleAnchor
 	m_pAssembleAnchor=pAssembleAnchor;
 	m_pAnchorBolt=pAssembleAnchor->GetAnchorBolt();
 }
-void CAssembleAnchorBolt::InitPropHashtable()
+int CAssembleAnchorBolt::InitPropHashtable()
 {
 	int id=1;
 	propHashtable.SetHashTableGrowSize(HASHTABLESIZE);
@@ -338,6 +340,7 @@ void CAssembleAnchorBolt::InitPropHashtable()
 	AddPropItem("acs.axisZ.x",PROPLIST_ITEM(id++,"X"));
 	AddPropItem("acs.axisZ.y",PROPLIST_ITEM(id++,"Y"));
 	AddPropItem("acs.axisZ.z",PROPLIST_ITEM(id++,"Z"));
+	return id;
 }
 int CAssembleAnchorBolt::GetPropValueStr(long id, char *valueStr,UINT nMaxStrBufLen/*=100*/)
 {
