@@ -300,6 +300,7 @@ END_MESSAGE_MAP()
 void Test1();
 void Test2();
 void Test3();
+void Test4();
 void CTIDApp::OnAppAbout()
 {
 	return Test3();
@@ -352,13 +353,45 @@ void Test2()
 //测试基础根开
 void Test3()
 {
-	int iBodySerial = 1;
-	int nSubLeg = gpTidModel->GetSubLegCount(1);
-	logerr.Log("呼高1的子腿数为：%d",nSubLeg);
-	for (int i = 0; i < nSubLeg; i++)
+	int nHeightGroup = gpTidModel->HeightGroupCount();
+	for (int i = 0; i < nHeightGroup; i++)
 	{
-		double fWidth = gpTidModel->GetSubLegBaseWidth(iBodySerial, i+1);
-		logerr.Log("%d号子腿根开：%g",i+1, fWidth);
+		int iBodySerial = i + 1;
+		int nSubLeg = gpTidModel->GetSubLegCount(iBodySerial);
+		logerr.Log("\n呼高%d的接腿数为：%d", i+1,nSubLeg);
+		for (int j = 0; j < nSubLeg; j++)
+		{
+			int iSubLegSerial = j + 1;
+			double fWidth = gpTidModel->GetSubLegBaseWidth(iBodySerial, iSubLegSerial);
+			logerr.Log("\t%d号子腿根开：%g", iSubLegSerial, fWidth);
+		}
+	}
+	if (logerr.IsHasContents())
+		logerr.ShowToScreen();
+}
+//测试计算指定呼高下的各接腿的实际呼高、接身高及腿长
+void Test4()
+{
+	ITidHeightGroup* pHeightGroup = gpTidModel->GetHeightGroupAt(0);
+	if (pHeightGroup == NULL)
+		return;
+	double fZeroZ = gpTidModel->GetNamedHeightZeroZ();
+	double fTransZ = pHeightGroup->GetBody2LegTransitZ();
+	int nn = pHeightGroup->GetLegSerialArr(NULL);
+	ARRAY_LIST<int> xLegSerialArr;
+	xLegSerialArr.SetSize(nn);
+	pHeightGroup->GetLegSerialArr(xLegSerialArr.m_pData);
+	ITidTowerInstance* pTowerInstance = NULL;
+	for (int i = 0; i < nn; i++)
+	{
+		pTowerInstance = pHeightGroup->GetTowerInstance(xLegSerialArr[i], xLegSerialArr[i], xLegSerialArr[i], xLegSerialArr[i]);
+		if (pTowerInstance)
+		{
+			double fHeight = pTowerInstance->GetInstanceHeight();
+			logerr.Log("接腿%d的实际呼高：%g", i + 1, fHeight - fZeroZ);
+			logerr.Log("接腿%d的实际腿长：%g", i + 1, fHeight - fTransZ);
+			logerr.Log("接腿%d的接身高：%g", i + 1, fTransZ - fZeroZ);
+		}
 	}
 	if (logerr.IsHasContents())
 		logerr.ShowToScreen();

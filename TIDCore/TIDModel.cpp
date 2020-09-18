@@ -400,9 +400,13 @@ bool CTidModel::GetAnchorAt(short index,short* psiPosX,short* psiPosY)
 		*psiPosY=location.siPosY;
 	return true;
 }
-WORD CTidModel::GetSubLegCount(BYTE ciBodySerial)
+WORD CTidModel::GetAllLegCount()
 {
 	return m_xFoundationSection.cnSubLegCount;
+}
+WORD CTidModel::GetSubLegCount(BYTE ciBodySerial)
+{
+	return m_xFoundationSection.GetSubLegCount(ciBodySerial);
 }
 //获取指定呼高下某接腿的基础坐标
 bool CTidModel::GetSubLegBaseLocation(BYTE ciBodySerial,BYTE ciLegSerial,double* pos3d)

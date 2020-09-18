@@ -582,6 +582,7 @@ public:
 	virtual WORD GetAnchorCount();
 	virtual bool GetAnchorAt(short index,short* psiPosX,short* psiPosY);
 	//基础信息
+	virtual WORD GetAllLegCount();
 	virtual WORD GetSubLegCount(BYTE ciBodySerial);
 	virtual bool GetSubLegBaseLocation(BYTE ciBodySerial, BYTE ciLegSerial, double* pos3d);
 	virtual double GetSubLegBaseWidth(BYTE ciBodySerial, BYTE ciLegSerial);	//基础根开

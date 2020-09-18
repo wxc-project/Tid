@@ -422,6 +422,7 @@ public:	//V1.4新增特性
 	virtual WORD GetAnchorCount()=0;
 	virtual bool GetAnchorAt(short index,short* psiPosX,short* psiPosY)=0;
 	//基础信息
+	virtual WORD GetAllLegCount() = 0;
 	virtual WORD GetSubLegCount(BYTE ciBodySerial)=0;
 	virtual bool GetSubLegBaseLocation(BYTE ciBodySerial,BYTE ciLegSerial,double* pos3d)=0;
 	virtual double GetSubLegBaseWidth(BYTE ciBodySerial, BYTE ciLegSerial) = 0;
